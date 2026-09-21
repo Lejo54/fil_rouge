@@ -1,0 +1,66 @@
+	.gros-carre {
+		width: 90%; /* Permet une meilleur adaptation PC/Téléphone */
+		max-width: 300px;
+		height: 300px;
+		background-color: #a38139;
+
+		display: flex;
+		flex-direction: column;
+		align-items: center; /* Centre tous a l'horizontal */
+		justify-content: space-between; /* Espacement vertical fluide */
+
+		padding: 20px 0;
+		box-sizing: border-box; /* Inclut le padding dans les 300px de hauteur */
+		border: 1px solid #ccc;
+	}
+
+	/* En-tête Connection */
+	.rectangle-haut {
+		width: 85%;
+		height: 40px;
+		background-color: #2b3a55;
+		color: white;
+		border-radius: 8px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-family: serif;
+		font-size: 22px;
+	}
+
+	/* Box ID et MDP */
+	.champ-texte {
+		width: 70%;
+		height: 35px;
+		background-color: #696969;
+		border: none;
+		color: white;
+		text-align: center;
+		font-size: 16px;
+		outline: none;
+	}
+
+		.champ-texte::placeholder {
+			color: white; /* Met le texte en blanc car il s affiche en gris clair de base et c'est peu lisible sur du gris clair */
+		}
+
+	/* Alignement des 2 boutons du bas (CC et SC) */
+	.conteneur-boutons {
+		width: 85%;
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.bouton-bas {
+		width: 45%;
+		height: 35px;
+		background-color: #b0b0b0;
+		border: none;
+		color: white;
+		font-weight: bold;
+		font-size: 16px;
+		cursor: pointer;
+	}
+		.bouton-bas:hover {
+			color: blue; /* Le texte devient bleu quand souris passe dessus */
+		}
