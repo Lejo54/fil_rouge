@@ -1,7 +1,7 @@
 	.gros-carre {
-		width: 90%; /* Permet une meilleur adaptation PC/Téléphone */
+		width: 90rem; /* Permet une meilleur adaptation PC/Téléphone */
 		max-width: 300px;
-		height: 300px;
+		height: 25rem;
 		background-color: #a38139;
 
 		display: flex;
@@ -17,7 +17,7 @@
 	/* En-tête Connection */
 	.rectangle-haut {
 		width: 85%;
-		height: 40px;
+		height: 2rem;
 		background-color: #2b3a55;
 		color: white;
 		border-radius: 8px;
@@ -29,9 +29,25 @@
 	}
 
 	/* Box ID et MDP */
+
+  .label-text {
+    width: 10rem;
+		height: 2rem;
+		padding-left: 0.5rem;
+		padding-right: 0.5rem;
+		background-color: #6a86ba;
+		color: #0b0707;
+		border-radius: 8px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-family: serif;
+    font-weight: bold;
+		font-size: 18px;
+  }
 	.champ-texte {
-		width: 70%;
-		height: 35px;
+		width: 15rem;
+		height: 2rem;
 		background-color: #696969;
 		border: none;
 		color: white;
@@ -51,7 +67,7 @@
 		justify-content: space-between;
 	}
 
-	.bouton-bas {
+	.bouton-bas, .bouton-bas > button {
 		width: 45%;
 		height: 35px;
 		background-color: #b0b0b0;
@@ -61,6 +77,20 @@
 		font-size: 16px;
 		cursor: pointer;
 	}
-		.bouton-bas:hover {
+    .bouton-bas > button, .bouton-bas > button > a{
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .bouton-bas > button {
+      padding: 0;
+    }
+    .bouton-bas > button > a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .bouton-bas:hover , .bouton-bas > button > a:hover{
 			color: blue; /* Le texte devient bleu quand souris passe dessus */
 		}
