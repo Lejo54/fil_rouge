@@ -1,4 +1,5 @@
 body {
+	display:flex;
 	background-image: url("../images/background.jpg");
 	background-size: cover;
 	background-attachment: fixed;
@@ -7,6 +8,44 @@ body {
 	overflow-y:auto;
 }
 
+.main-interface {
+	display: flex;
+	height: auto;
+	width: 100%;
+	background-color: #f1f1f1;
+	margin: 0;
+  padding: 0;
+	margin-left: 1rem;
+	margin-right: 1rem;
+}
+
+/* Navigation Bar*/
+ul.nav-bar {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  background-color: #f1f1f1;
+}
+
+li.nav-element a {
+  display: block;
+  color: black;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+li.nav-element a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+li.nav-element a:hover:not(.active) {
+  background-color: #555555;
+  color: white;
+}
+
+/*Signin/Signup interface*/
 
 .gros-carre {
 	width: 90rem; /* Permet une meilleur adaptation PC/Téléphone */
@@ -41,7 +80,7 @@ body {
 /* Box ID et MDP */
 
 .label-text {
-	width: 10rem;
+	width: auto;
 	height: 2rem;
 	padding-left: 0.5rem;
 	padding-right: 0.5rem;
@@ -104,29 +143,3 @@ body {
 	.bouton-bas:hover , .bouton-bas > button > a:hover{
 		color: blue; /* Le texte devient bleu quand souris passe dessus */
 	}
-
-/* Navigation Bar*/
-ul.navBar {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  width: 200px;
-  background-color: #f1f1f1;
-}
-
-li.navElement a {
-  display: block;
-  color: black;
-  padding: 8px 16px;
-  text-decoration: none;
-}
-
-li.navElement a.active {
-  background-color: #04AA6D;
-  color: white;
-}
-
-li.navElement a:hover:not(.active) {
-  background-color: #555555;
-  color: white;
-}
