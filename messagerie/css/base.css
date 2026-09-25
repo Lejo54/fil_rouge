@@ -117,8 +117,8 @@ li.nav-element a:hover:not(.active) {
 }
 
 .bouton-bas, .bouton-bas > button {
-	width: 45%;
-	height: 35px;
+	width: 5rem;
+	height: 2rem;
 	background-color: #b0b0b0;
 	border: none;
 	color: white;
