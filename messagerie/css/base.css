@@ -1,82 +1,3 @@
-css body {
-	display: flex;
-	background-image: url("../images/background.jpg");
-	background-size: cover;
-	background-attachment: fixed;
-	cursor: var(--cursor);
-	overflow-x: hidden;
-	overflow-y: auto;
-}
-
-.main-interface {
-	/* display: flex; */
-	height: 60rem;
-	width: 100%;
-	background-color: #f1f1f1;
-	margin: 0;
-	padding: 0;
-	margin-left: 1rem;
-	margin-right: 1rem;
-	text-align: center;
-}
-
-/* Navigation Bar*/
-ul.nav-bar {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	width: 200px;
-	background-color: #f1f1f1;
-}
-
-li.nav-element a {
-	display: block;
-	color: black;
-	padding: 8px 16px;
-	text-decoration: none;
-}
-
-	li.nav-element a.active {
-		background-color: #04AA6D;
-		color: white;
-	}
-
-	li.nav-element a:hover:not(.active) {
-		background-color: #555555;
-		color: white;
-	}
-
-/*Signin/Signup interface*/
-
-.gros-carre {
-	width: 90rem; /* Permet une meilleur adaptation PC/Téléphone */
-	max-width: 300px;
-	height: 25rem;
-	background-color: #a38139;
-	display: flex;
-	flex-direction: column;
-	align-items: center; /* Centre tous a l'horizontal */
-	justify-content: space-between; /* Espacement vertical fluide */
-
-	padding: 20px 0;
-	box-sizing: border-box; /* Inclut le padding dans les 300px de hauteur */
-	border: 1px solid #ccc;
-}
-
-/* En-tête Connection */
-.rectangle-haut {
-	width: 85%;
-	height: 2rem;
-	background-color: #2b3a55;
-	color: white;
-	border-radius: 8px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	font-family: serif;
-	font-size: 22px;
-}
-
 body {
 	display: flex;
 	background-image: url("../images/background.jpg");
@@ -105,6 +26,7 @@ ul.nav-bar {
 	margin: 0;
 	padding: 0;
 	width: 200px;
+	height: 48rem;
 	background-color: #f1f1f1;
 }
 
@@ -264,3 +186,8 @@ li.contact a {
 		color: white;
 	}
 
+.pub {
+	width: 100%;
+	height: 100%;
+	background-image: url("../images/pub1.png");
+}
