@@ -1,32 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./css/base.css">
-  <title>Home page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/base.css">
+    <title>Home page</title>
 </head>
 <body>
-  
 
-  <ul class="nav-bar">
-    <li class="nav-element"><a href="./index.html" class="active">Home</a></li>
-    <li class="nav-element"><a href="./Chats">My Chats</a></li>
-    <li class="nav-element"><a href="./contact/contact.html">Contact</a></li>
-    <li class="nav-element"><a href="./logout">Logout</a></li>
-    <li class="nav-element"><a href="./signin.html" title="Connect">Signin</a></li>
-    <li class="nav-element"><a href="./creation_account/signup.html" title="Create an account">Signup</a></li>
-  </ul>
-  
-  <div class="main-interface">
-    <p>
-      Veuillez vous connecter ou créer un compte pour accéder à la messagerie.
-      <label for="signin" class="bouton-bas">
-      <button>
-        <a href="../signin.html" title="Connect">Signin</a> 
-      </button>
-    </label>
-    </p>
-  </div>
+
+    <ul class="nav-bar">
+        <li class="nav-element"><a href="./index.html" class="active">Home</a></li>
+        <li class="nav-element"><a href="./Chats">My Chats</a></li>
+        <li class="nav-element"><a href="./contact/contact.html">Contact</a></li>
+        <li class="nav-element"><a href="./convert/convert.html">Convert Currency</a></li>
+        <li class="nav-element"><a href="./logout">Logout</a></li>
+        <li class="nav-element"><a href="./signin.html" title="Connect">Signin</a></li>
+        <li class="nav-element"><a href="./creation_account/signup.html" title="Create an account">Signup</a></li>
+    </ul>
+
+    <div class="main-interface">
+        Please log in or create an account to access the email.</br>
+        <p class="conteneur-boutons">
+
+            <!-- Go to signin page -->
+            <label for="signin" class="bouton-bas">
+                <button>
+                    <a href="./signin.html" title="Connect">Log in</a>
+                </button>
+            </label>
+
+            <!-- Go to signup page -->
+            <label for="signup" class="bouton-bas">
+                <button>
+                    <a href="./creation_account/signup.html" title="Create an account">Create an account</a>
+                </button>
+            </label>
+
+        </p>
+    </div>
 </body>
 </html>
