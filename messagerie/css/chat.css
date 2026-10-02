@@ -1,0 +1,226 @@
+/* Reset & structure de la page */
+body {
+    min-height: calc(100vh - 16px);
+    box-sizing: border-box;
+    display: flex;
+    font-family: serif;
+}
+
+/* Navigation Bar*/
+ul.nav-bar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: #f1f1f1;
+}
+
+li.nav-element a {
+    display: block;
+    color: black;
+    padding: 8px 16px;
+    text-decoration: none;
+    font-family: serif;
+}
+
+    li.nav-element a.active {
+        background-color: #04AA6D;
+        color: white;
+    }
+
+    li.nav-element a:hover:not(.active) {
+        background-color: #555555;
+        color: white;
+    }
+
+/* Container global pour centrer le chat dans la page */
+.chat-wrapper {
+    flex: 1;
+    min-height: calc(100vh - 16px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 24px;
+    box-sizing: border-box;
+    gap: 16px;
+    font-family: serif;
+}
+
+/* Boîte blanche principale au milieu (zone d'affichage des messages) */
+.chat-display-box {
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 20px;
+    width: 100%;
+    max-width: 600px;
+    height: 480px;
+    max-height: calc(100vh - 140px);
+    overflow-y: auto;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    scroll-behavior: smooth;
+    font-family: serif;
+}
+
+/* Style de défilement pour la boîte blanche */
+.chat-display-box::-webkit-scrollbar {
+    width: 6px;
+}
+
+.chat-display-box::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 8px;
+}
+
+.chat-display-box::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 8px;
+}
+
+.chat-display-box::-webkit-scrollbar-thumb:hover {
+    background: #aaa;
+}
+
+/* État vide si aucun message */
+.chat-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #888;
+    text-align: center;
+    gap: 8px;
+    font-size: 15px;
+    user-select: none;
+    font-family: serif;
+}
+
+.chat-empty-icon {
+    font-size: 40px;
+}
+
+/* Styles des bulles pour messages */
+.message {
+    display: flex;
+    flex-direction: column;
+    max-width: 75%;
+    font-family: serif;
+}
+
+/* Message envoyé par l'utilisateur */
+.message.sent {
+    align-self: flex-end;
+}
+
+.message.sent .bubble {
+    background-color: #04AA6D;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 16px 16px 4px 16px;
+    word-break: break-word;
+    font-size: 16px;
+    font-family: serif;
+    box-shadow: 0 2px 8px rgba(4, 170, 109, 0.25);
+    line-height: 1.4;
+}
+
+.message.sent .time {
+    font-size: 11px;
+    color: #888;
+    align-self: flex-end;
+    margin-top: 4px;
+    margin-right: 4px;
+    font-family: serif;
+}
+
+/* Message reçu (ex: message de bienvenue ou réponse) */
+.message.received {
+    align-self: flex-start;
+}
+
+.message.received .bubble {
+    background-color: #f1f3f5;
+    color: #212529;
+    padding: 10px 16px;
+    border-radius: 16px 16px 16px 4px;
+    word-break: break-word;
+    font-size: 16px;
+    font-family: serif;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    line-height: 1.4;
+}
+
+.message.received .time {
+    font-size: 11px;
+    color: #888;
+    align-self: flex-start;
+    margin-top: 4px;
+    margin-left: 4px;
+    font-family: serif;
+}
+
+/* Boîte de message en bas */
+.aligne-en-bas {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #ffffff;
+    padding: 8px 14px;
+    border-radius: 14px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    border: 1px solid #e0e0e0;
+    max-width: 600px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Zone de saisie (input ou textarea) */
+.aligne-en-bas textarea,
+.aligne-en-bas input[type="text"] {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    font-family: serif;
+    padding: 8px 6px;
+    background: transparent;
+    color: #333;
+    resize: none;
+    line-height: 1.4;
+}
+
+.aligne-en-bas textarea::placeholder,
+.aligne-en-bas input[type="text"]::placeholder {
+    color: #999;
+    font-family: serif;
+}
+
+/* Bouton d'envoi complètement vert */
+.aligne-en-bas .btn-send,
+.aligne-en-bas button {
+    background-color: #04AA6D;
+    border: none;
+    border-radius: 50%;
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.15s;
+    padding: 0;
+}
+
+.aligne-en-bas .btn-send:hover,
+.aligne-en-bas button:hover {
+    background-color: #038f5c;
+    transform: scale(1.08);
+}
+
+.aligne-en-bas .btn-send:active,
+.aligne-en-bas button:active {
+    transform: scale(0.95);
+}
