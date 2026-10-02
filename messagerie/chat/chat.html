@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/chat.css">
+    <title>My Chats</title>
+</head>
+<body>
+
+    <ul class="nav-bar">
+        <li class="nav-element"><a href="../index.html">Home</a></li>
+        <li class="nav-element"><a href="./chat.html" class="active">My Chats</a></li>
+        <li class="nav-element"><a href="../contact/contact.html">Contact</a></li>
+        <li class="nav-element"><a href="../convert/convert.html">Convert Currency</a></li>
+    </ul>
+
+    <div class="chat-wrapper">
+        <!-- Boîte blanche au milieu qui affiche les messages -->
+        <div class="chat-display-box" id="chat-display-box"></div>
+
+        <!-- Boîte de message en bas -->
+        <div class="aligne-en-bas">
+            <textarea id="message-input" name="message" rows="1" placeholder="Écrivez votre message ici..."></textarea>
+            <button type="button" id="btn-send" class="btn-send" title="Envoyer"></button>
+        </div>
+    </div>
+
+    <script src="./chat.js"></script>
+</body>
+</html>
