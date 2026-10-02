@@ -1,0 +1,32 @@
+/* Box ID et MDP */
+
+.label-text {
+	width: auto;
+	height: 2rem;
+	padding-left: 0.5rem;
+	padding-right: 0.5rem;
+	background-color: #6a86ba;
+	color: #0b0707;
+	border-radius: 8px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-family: serif;
+	font-weight: bold;
+	font-size: 18px;
+}
+
+.champ-texte {
+	width: 15rem;
+	height: 2rem;
+	background-color: #696969;
+	border: none;
+	color: white;
+	text-align: center;
+	font-size: 16px;
+	outline: none;
+}
+
+	.champ-texte::placeholder {
+		color: white; /* Met le texte en blanc car il s affiche en gris clair de base et c'est peu lisible sur du gris clair */
+	}
