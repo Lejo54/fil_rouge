@@ -11,7 +11,13 @@ document.addEventListener("DOMContentLoaded", () => { //Pour pas que des trucs s
         return;
     }
 
-
+    // Fonction pour mettre l'heure actuelle (ex: transforme 14:5 en 14:05)
+    function getCurrentTime() {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, "0");
+        const minutes = String(now.getMinutes()).padStart(2, "0");
+        return `${hours}:${minutes}`;
+    }
 
     // Fonction pour ajouter un message dans la boîte blanche du milieu
     function displayMessage(text, isSent = true, time = null) {
