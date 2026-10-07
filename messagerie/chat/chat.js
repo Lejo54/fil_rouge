@@ -1,13 +1,12 @@
-document.addEventListener("DOMContentLoaded", () => { //Pour pas que des trucs se passe avant le chargement entier de la page
+document.addEventListener("DOMContentLoaded", () => { // Pour pas que des trucs se passe avant le chargement entier de la page
 
-    // Recherche les éléments comme la boite de discu, la zone de saisie et le bouton d envoie
+    // Recherche des éléments comme la boite de discu, la zone de saisie et le bouton d'envoi
     const displayBox = document.getElementById("chat-display-box") || document.querySelector(".chat-display-box, [class*='chat-display-box']");
     const messageInput = document.getElementById("message-input") || document.querySelector(".aligne-en-bas textarea, .aligne-en-bas input[type='text']");
     const sendBtn = document.getElementById("btn-send") || document.querySelector(".btn-send, .aligne-en-bas button");
 
-    
     if (!displayBox || !messageInput || !sendBtn) {
-        console.warn("Éléments du chat introuvables :", { displayBox, messageInput, sendBtn });
+        console.warn("�l�ments du chat introuvables :", { displayBox, messageInput, sendBtn });
         return;
     }
 
@@ -19,15 +18,15 @@ document.addEventListener("DOMContentLoaded", () => { //Pour pas que des trucs s
         return `${hours}:${minutes}`;
     }
 
-    // Fonction pour ajouter un message dans la boîte blanche du milieu
+    // Fonction pour ajouter un message dans la boite blanche du milieu
     function displayMessage(text, isSent = true, time = null) {
-        // Supprimer l'état vide s'il est présent
+        // Supprimer l'état vide si présent
         const emptyState = displayBox.querySelector(".chat-empty-state");
         if (emptyState) {
             emptyState.remove();
         }
 
-        // Cette partie va permettre de voir si le message est envoyé par l'utilisateur ou reçu, et de bien l'afficher
+        // DVérifie si le message est envoyé ou reçu pour bien l'afficher
         const msgElement = document.createElement("div");
         msgElement.className = `message ${isSent ? "sent" : "received"}`;
 
@@ -37,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => { //Pour pas que des trucs s
 
         const timeSpan = document.createElement("span");
         timeSpan.className = "time";
-        timeSpan.textContent = time;
+        timeSpan.textContent = time || getCurrentTime();
 
         msgElement.appendChild(bubble);
         msgElement.appendChild(timeSpan);
@@ -47,7 +46,10 @@ document.addEventListener("DOMContentLoaded", () => { //Pour pas que des trucs s
         displayBox.scrollTop = displayBox.scrollHeight;
     }
 
- 
+    // Message d'accueil
+    function loadSavedMessages() {
+        displayMessage("Bonjour ! Tapez votre message dans la zone en bas puis cliquez sur le bouton ou appuyez sur Entrée pour l'envoyer.", false);
+    }
 
     // Fonction principale d'envoi du message
     function sendMessage() {
@@ -56,29 +58,31 @@ document.addEventListener("DOMContentLoaded", () => { //Pour pas que des trucs s
             return;
         }
 
+        const time = getCurrentTime();
 
-        // Afficher le message de l'utilisateur dans la boîte blanche au milieu (marche pas pour le moment)
+        // Afficher le message de l'utilisateur avec la bonne heure
         displayMessage(text, true, time);
 
-        // Vider la boîte de texte en bas et redonner le focus
+        // Vider la boite de texte en bas et redonne le focus
         messageInput.value = "";
         messageInput.focus();
     }
 
-    // Événement lors du clic pour le bouton d'envoi
+    // Envoi lors du clic sur le bouton d'envoi
     sendBtn.addEventListener("click", (e) => {
         e.preventDefault();
         sendMessage();
     });
 
-    // Événement lorsqu'on appuie sur la touche 'Entrée' dans la zone de texte
+    // Envoie lorsqu'on appuie sur la touche 'Entrée' dans la zone de texte
     messageInput.addEventListener("keydown", (e) => {
         if (e.key === "Enter" && !e.shiftKey) {
-            e.preventDefault(); // Empêche le saut de ligne
+            e.preventDefault(); // Emp�che le saut de ligne
             sendMessage();
         }
     });
 
-    // Initialise les messages au chargement
+    // Affiche le message d'accueil au chargement
+    loadSavedMessages();
 
 });
