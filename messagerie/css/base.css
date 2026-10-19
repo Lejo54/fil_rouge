@@ -163,3 +163,19 @@ li.nav-element a {
 	height: 100%;
 	background-image: url("../images/pub1.png");
 }
+/* Ce style s'applique uniquement quand la boîte est ouverte */
+dialog[open] {
+    position: fixed;
+    top: 0; /* Aligné tout en haut */
+    right: 0; /* Aligné tout à droite */
+    bottom: 0; /* Aligné tout en bas (pour faire toute la hauteur) */
+    height: 100vh; /* Prend 100% de la hauteur de l'écran */
+    width: 350px; /* Largeur de ton choix pour le panneau de droite */
+    margin: 0; /* Supprime les marges par défaut du navigateur */
+    border: none; /* Enlève la bordure noire par défaut */
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1); /* Petite ombre à gauche pour le relief */
+    /* Optionnel : pour aligner le bouton fermer et le texte proprement */
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
