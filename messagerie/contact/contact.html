@@ -8,7 +8,13 @@
   <link rel="stylesheet" href="../css/contact.css">
   <title>My Contacts</title>
 </head>
-
+<!-- La boîte cachée par défaut -->
+<dialog id="maBoite">
+    <h2>Titre de la boîte</h2>
+    <p>Ceci est le contenu de votre boîte de dialogue.</p>
+    <!-- Bouton de fermeture -->
+    <button id="fermerBoite">Fermer</button>
+</dialog>
 <body>
 
   <ul class="nav-bar">
@@ -21,7 +27,7 @@
 
     </div>
   </ul>
-
+  
   <div class="main-interface">
     <div class="add-contact">
       <!-- Add contact -->
@@ -84,6 +90,7 @@
       </ul>
     </div>
   </div>
+  <script src="./contact.js"></script>
 
 </body>
 
