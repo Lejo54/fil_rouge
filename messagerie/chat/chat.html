@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,13 +8,13 @@
     <link rel="stylesheet" href="../css/chat.css">
     <title>My Chats</title>
 </head>
+
 <body>
 
     <ul class="nav-bar">
         <li class="nav-element"><a href="../index.html">Home</a></li>
         <li class="nav-element"><a href="./chat.html" class="active">My Chats</a></li>
         <li class="nav-element"><a href="../contact/contact.html">Contact</a></li>
-        <li class="nav-element"><a href="../convert/convert.html">Convert Currency</a></li>
     </ul>
 
     <div class="chat-wrapper">
@@ -26,7 +27,22 @@
             <button type="button" id="btn-send" class="btn-send" title="Envoyer"></button>
         </div>
     </div>
+    <!-- Ouvre le boutton -->
+    <button id="open-box">Curr€ncy Converter</button>
 
+    <!-- Cache la boite de base -->
+    <dialog id="box-converter">
+        <h2>Currency converter</h2>
+        <p>Ceci est le contenu de votre boîte de dialogue.</p>
+        <!-- Ferme le bouton -->
+        <button id="close-box">close</button>
+    </dialog>
+
+    <!-- Supabase et Java -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../supabaseClient.js"></script>
+    <script src="../currency_converter/currency_converter.js"></script>
     <script src="./chat.js"></script>
 </body>
+
 </html>

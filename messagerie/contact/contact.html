@@ -13,14 +13,14 @@
 
   <ul class="nav-bar">
     <li class="nav-element"><a href="../index.html">Home</a></li>
-    <li class="nav-element"><a href="./Chats">My Chats</a></li>
+    <li class="nav-element"><a href="../chat/chat.html">My Chats</a></li>
     <li class="nav-element"><a href="./contact/contact.html" class="active">Contact</a></li>
     <li class="nav-element"><a href="./logout">Logout</a></li>
     <div class="pub">
 
     </div>
   </ul>
-  
+
   <div class="main-interface">
     <div class="add-contact">
       <!-- Add contact -->
@@ -89,12 +89,16 @@
 
   <!-- box default hidden -->
   <dialog id="box-converter">
-      <h2>Currency converter</h2>
-      <p>Ceci est le contenu de votre boîte de dialogue.</p>
-      <!-- close button -->
-      <button id="close-box">close</button>
+    <h2>Currency converter</h2>
+    <p>Ceci est le contenu de votre boîte de dialogue.</p>
+    <!-- close button -->
+    <button id="close-box">close</button>
   </dialog>
 
+  <!-- Supabase et Java Script -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- La ligne au dessus permet de récupérer le fichier officiel supabase pour faire focntionner -->>
+  <script src="../supabaseClient.js"></script>
   <script src="./contact.js"></script>
   <script src="../currency_converter/currency_converter.js"></script>
 </body>
