@@ -45,11 +45,38 @@
     <!-- box default hidden -->
     <dialog id="box-converter">
         <h2>Currency converter</h2>
-        <p>Ceci est le contenu de votre boîte de dialogue.</p>
+        <!-- Currency form -->
+        <form name="Convert" class="gros-carre">
+
+            <h2 class="rectangle-haut">Currency converter</h2>
+
+            <!-- Base currency -->
+            <label for="baseAmount" class="label-text">Base Amount</label><br>
+            <select name="base-currency" id="base-currency">
+                <option value="">--Choose base currency--</option>
+                <option value="euro">Euro(€)</option>
+            </select>
+            <input type="text" id="baseCurrency" name="baseCurrency" class="champ-texte"><br>
+
+            <!-- Convert currency -->
+            <label for="convertAmount" class="label-text">Convert Amount</label><br>
+            <select name="convert-currency" id="convert-currency">
+                <option value="">--Choose convert currency--</option>
+                <option value="euro">Euro(€)</option>
+            </select>
+            <input type="text" id="convertAmount" name="convertAmount" class="champ-texte"><br>
+
+            <!-- Convert button -->            
+            <p class="conteneur-boutons">
+                <button for="convert" id="convert" class="bouton-bas"> Convert </button>
+            </p>
+        </form> 
+
         <!-- close button -->
         <button id="close-box">close</button>
     </dialog>
 
+    <script src="./env.js"></script>
     <script src="./currency_converter/currency_converter.js"></script>
 </body>
 </html>
