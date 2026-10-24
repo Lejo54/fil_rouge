@@ -10,7 +10,7 @@ const _supabase = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
 // 3. Test de co
 async function verifierConnexion() {
     try {
-        const { error } = await supabase.from("channels").select("id").limit(1);
+        const { error } = await _supabase.from("channels").select("id").limit(1);
 
         if (error) {
             console.log("Erreur de connexion :", error.message);
