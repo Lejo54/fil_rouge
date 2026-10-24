@@ -12,34 +12,45 @@ async function getCurrencies() {
     }
 }
 
+let selectsFilled = false;
 const boutonOuvrir = document.getElementById('open-box');
 const boutonFermer = document.getElementById('close-box');
 const maBoite = document.getElementById('box-converter');
 
-boutonOuvrir.addEventListener('click', async () => {
-    //fill select box with currencies
+function fillSelects(currencies) {
 
-    //fetch data
-    var data = await getCurrencies();
-    var currencies = data.supported_codes
-
+    //sort in name order
     //collator is more efficient for sorting big data
     const collator = new Intl.Collator('en', { sensitivity: 'base' });
     const sortedCurrencies = [...currencies].sort((a, b) => collator.compare(a[1], b[1]));
 
     // clear out existing items
-    selectBoxBase.options.length = 0; 
+    selectBoxBase.options.length = 0;
     selectBoxConvert.options.length = 0;
 
     //first option
-    selectBoxBase.options.add(new Option("--Choose base currency--",""));
-    selectBoxConvert.options.add(new Option("--Choose convert currency--",""))
+    selectBoxBase.options.add(new Option("--Choose base currency--", ""));
+    selectBoxConvert.options.add(new Option("--Choose convert currency--", ""));
 
-    for (const [code, name] of Object.entries(sortedCurrencies)){
-        if(!name || !code) continue;
-        selectBoxBase.options.add(new Option(`${name[1]}(${name[0]})`, code));
-        selectBoxConvert.options.add(new Option(`${name[1]}(${name[0]})`, code))
+    for (const [code, name] of sortedCurrencies) {
+    if (!name || !code) continue;
+    selectBoxBase.options.add(new Option(`${name}(${code})`, code));
+    selectBoxConvert.options.add(new Option(`${name}(${code})`, code));
     }
+    selectsFilled = true;
+}
+
+boutonOuvrir.addEventListener('click', async () => {
+    //fill select box with currencies name and code
+
+    if(!selectsFilled){
+        //fetch data
+        var data = await getCurrencies();
+        var currencies = data.supported_codes
+
+        fillSelects(currencies)
+    }
+
     maBoite.show();
 });
 
