@@ -1,5 +1,21 @@
+
 const BASE_API="https://v6.exchangerate-api.com/v6/"+secretKey()+"/";
 
+// variables and fetch element
+let selectsFilled = false;
+const btnOpen = document.getElementById('open-box');
+const btnClose = document.getElementById('close-box');
+const convertBox = document.getElementById('box-converter');
+
+const btnConvert = document.getElementById('convert');
+const selectBoxBase = document.getElementById('base-currency');
+const selectBoxConvert = document.getElementById('convert-currency');
+const txtBoxBaseAmont = document.getElementById('base-amount');
+const txtBoxConvertAmount= document.getElementById('convert-amount');
+
+const isNumeric = (string) => string == Number.parseFloat(string)
+
+// function
 async function getCurrencies() {
     try {
         const res = await fetch(BASE_API+"codes");
@@ -11,11 +27,6 @@ async function getCurrencies() {
         console.log("Currencies fetched !");
     }
 }
-
-let selectsFilled = false;
-const boutonOuvrir = document.getElementById('open-box');
-const boutonFermer = document.getElementById('close-box');
-const maBoite = document.getElementById('box-converter');
 
 function fillSelects(currencies) {
 
@@ -40,30 +51,6 @@ function fillSelects(currencies) {
     selectsFilled = true;
 }
 
-boutonOuvrir.addEventListener('click', async () => {
-    //fill select box with currencies name and code
-
-    if(!selectsFilled){
-        //fetch data
-        var data = await getCurrencies();
-        var currencies = data.supported_codes
-
-        fillSelects(currencies)
-    }
-
-    maBoite.show();
-});
-
-boutonFermer.addEventListener('click', () => {
-    maBoite.close();
-});
-
-const btnConvert = document.getElementById('convert');
-const selectBoxBase = document.getElementById('base-currency');
-const selectBoxConvert = document.getElementById('convert-currency');
-const txtBoxBaseAmont = document.getElementById('baseAmount');
-const txtBoxConvertAmount= document.getElementById('convertAmount');
-
 async function Convert(baseCode,convertCode,amount) {
     try {
         const res = await fetch(BASE_API+"pair/"+baseCode+"/"+convertCode+"/"+amount);
@@ -76,7 +63,26 @@ async function Convert(baseCode,convertCode,amount) {
     }
 }
 
-const isNumeric = (string) => string == Number.parseFloat(string)
+//reaction
+
+btnOpen.addEventListener('click', async () => {
+    //fill select box with currencies name and code
+
+    if(!selectsFilled){
+        //fetch data
+        var data = await getCurrencies();
+        var currencies = data.supported_codes
+
+        fillSelects(currencies)
+    }
+
+    convertBox.show();
+});
+
+btnClose.addEventListener('click', () => {
+    convertBox.close();
+});
+
 btnConvert.onclick = async (event) => {
     event.preventDefault();
 
