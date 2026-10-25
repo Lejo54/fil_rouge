@@ -1,18 +1,26 @@
-function connect(accountId, accountPwd){
-  //Verify types
+async function connect(accountId, accountPwd){
+  //Verify data
   if ( typeof accountId !== 'string' || typeof accountPwd !== 'string'){
-    alert("Wrong type !")
+    alert("Wrong type !");
+    return false;
+  }
+  if(!accountId, !accountPwd){
+    alert("Email or password not filled !");
     return false;
   }
 
-  //Verify data
-  //TODO: faire la vérification avec la BDD
+  const { error } = await Auth.signIn(accountId, accountPwd);
+  if (error) {
+    console.log(error);
+    return false;
+  }
+  return true;
   
 }
 
 const form = document.getElementById('Connect');
 
-form.addEventListener('submit', function(event) {
+form.addEventListener('submit', async function(event) {
   // Replace default action
   event.preventDefault(); 
   
@@ -20,11 +28,10 @@ form.addEventListener('submit', function(event) {
   const formData = new FormData(form);
   
   // Create an account
-  let result=connect(formData.get("login"),formData.get("pwd"));
+  let result=await connect(formData.get("login"),formData.get("pwd"));
 
   if (result){
-    alert(result.id + result.pwd);
     //change page to the home page
-    window.location.href = "../index.html";
+    window.location.href = "./index.html";
   }
 });

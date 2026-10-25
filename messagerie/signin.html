@@ -6,34 +6,40 @@
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/form.css">
   <title>Messagerie: Connect</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- La ligne au dessus permet de récupérer le fichier officiel supabase pour faire focntionner -->
+  <script src="supabaseClient.js"></script>
+  <script src="auth.js"></script>
+  <script src="./connection/connection.js" defer></script>
 </head>
 <body>
 
-<!-- Connection form -->
-  <form name="Connect" class="gros-carre">
+<!-- Sign in form -->
+  <form id="Connect" class="gros-carre">
 
     <h2 class="rectangle-haut">Connection</h2>
 
     <!-- User login -->
-  <label for="login" class="label-text">Login</label><br>
-  <input type="text" id="login" name="login" class="champ-texte"><br>
+    <label for="login" class="label-text">Login</label><br>
+    <input type="text" id="login" name="login" class="champ-texte"><br>
 
-  <!-- User password -->
-  <label for="pwd" class="label-text">Password</label><br>
-  <input type="text" id="pwd" name="pwd" class="champ-texte"><br>
+    <!-- User password -->
+    <label for="pwd" class="label-text">Password</label><br>
+    <input type="text" id="pwd" name="pwd" class="champ-texte"><br>
 
-  <!-- Buttons -->
-  <p class="conteneur-boutons">
-    <!-- Go to signup page -->
-    <label for="signup" class="bouton-bas">
-      <button>
-        <a href="./creation_account/signup.html" title="Create an account">Signup</a> 
-      </button>
-    </label>
+    <!-- Buttons -->
+    <p class="conteneur-boutons">
+      <!-- Go to signup page -->
+      <label for="signup" class="bouton-bas">
+        <button>
+          <a href="./creation_account/signup.html" title="Create an account">Signup</a> 
+        </button>
+      </label>
 
-    <!-- Submit form -->
-    <input type="submit" value="Submit" class="bouton-bas">
-  </p>
+      <!-- Submit form -->
+      <input type="submit" value="Submit" class="bouton-bas">
+    </p>
   </form> 
 </body>
 </html>

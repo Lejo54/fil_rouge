@@ -1,44 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../css/base.css">
   <link rel="stylesheet" href="../css/form.css">
   <title>Messagerie: Create Account</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- La ligne au dessus permet de récupérer le fichier officiel supabase pour faire focntionner -->
+  <script src="../supabaseClient.js"></script>
+  <script src="../auth.js"></script>
+  <script src="./creation.js" defer></script>
 </head>
+
 <body>
 
-<!-- Create account form -->
-  <form id="CreateAccount" class="gros-carre">
+  <!-- Create account form -->
+  <form id="create-account" class="gros-carre">
 
     <h2 class="rectangle-haut">Create account</h2>
 
     <!-- User login -->
-  <label for="login" class="label-text">Login</label><br>
-  <input type="text" id="login" name="login" class="champ-texte"><br>
+    <label for="login" class="label-text">Login</label><br>
+    <input type="text" id="login" name="login" class="champ-texte"><br>
 
-  <!-- User password -->
-  <label for="pwd" class="label-text">Password</label><br>
-  <input type="text" id="pwd" name="pwd" class="champ-texte"><br>
+    <!-- User password -->
+    <label for="pwd" class="label-text">Password</label><br>
+    <input type="text" id="pwd" name="pwd" class="champ-texte"><br>
 
-  <!-- User password confirmation -->
-  <label for="pwd2" class="label-text">Confirm password</label><br>
-  <input type="text" id="pwd2" name="pwd2" class="champ-texte"><br>
+    <!-- User password confirmation -->
+    <label for="pwd2" class="label-text">Confirm password</label><br>
+    <input type="text" id="pwd2" name="pwd2" class="champ-texte"><br>
 
-  <!-- Buttons -->
-  <p class="conteneur-boutons">
-    <!-- Go to signin page -->
-    <label for="signin" class="bouton-bas">
-      <button>
-        <a href="../signin.html" title="Connect">Signin</a> 
-      </button>
-    </label>
+    <!-- Buttons -->
+    <p class="conteneur-boutons">
+      <!-- Go to signin page -->
+      <label for="signin" class="bouton-bas">
+        <button>
+          <a href="../signin.html" title="Connect">Signin</a>
+        </button>
+      </label>
 
-    <!-- Submit form -->
-    <input type="submit" value="Submit" class="bouton-bas">
-  </p>
-  </form> 
+      <!-- Submit form -->
+      <input type="submit" value="Submit" class="bouton-bas">
+    </p>
+  </form>
 </body>
-<script src="./creation.js"></script>
+
 </html>
