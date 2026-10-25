@@ -30,11 +30,31 @@
     <!-- Ouvre le boutton -->
     <button id="open-box">Curr€ncy Converter</button>
 
-    <!-- Cache la boite de base -->
+    <!-- box default hidden -->
     <dialog id="box-converter">
         <h2>Currency converter</h2>
-        <p>Ceci est le contenu de votre boîte de dialogue.</p>
-        <!-- Ferme le bouton -->
+        <!-- Currency form -->
+        <form name="Convert" class="gros-carre">
+
+            <h2 class="rectangle-haut">Currency converter</h2>
+
+            <!-- Base currency -->
+            <label for="baseAmount" class="label-text">Base Amount</label><br>
+            <select name="base-currency" id="base-currency"></select>
+            <input type="text" id="baseAmount" name="baseAmount" class="champ-texte"><br>
+
+            <!-- Convert currency -->
+            <label for="convertAmount" class="label-text">Convert Amount</label><br>
+            <select name="convert-currency" id="convert-currency"></select>
+            <input type="text" id="convertAmount" name="convertAmount" class="champ-texte"><br>
+
+            <!-- Convert button -->            
+            <p class="conteneur-boutons">
+                <button for="convert" id="convert" class="bouton-bas"> Convert </button>
+            </p>
+        </form> 
+
+        <!-- close button -->
         <button id="close-box">close</button>
     </dialog>
 

@@ -58,12 +58,33 @@ boutonFermer.addEventListener('click', () => {
     maBoite.close();
 });
 
-const btn = document.getElementById('convert');
+const btnConvert = document.getElementById('convert');
 const selectBoxBase = document.getElementById('base-currency');
 const selectBoxConvert = document.getElementById('convert-currency');
+const txtBoxBaseAmont = document.getElementById('baseAmount');
+const txtBoxConvertAmount= document.getElementById('convertAmount');
 
+async function Convert(baseCode,convertCode,amount) {
+    try {
+        const res = await fetch(BASE_API+"pair/"+baseCode+"/"+convertCode+"/"+amount);
+        const convertAmount= await res.json();
+        return convertAmount;
+    } catch (err) {
+        console.error("Error :", err);
+    } finally {
+        console.log("Amount convert !");
+    }
+}
 
-btn.onclick = (event) => {
+btnConvert.onclick = async (event) => {
     event.preventDefault();
-    alert(selectBoxConvert.value);
+
+    if(!selectBoxBase.value || !selectBoxConvert.value || !txtBoxBaseAmont.value){
+        alert("Select 2 currencies and an amount to convert !");
+        return;
+    }
+    const convert= await Convert(selectBoxBase.value,selectBoxConvert.value,txtBoxBaseAmont.value);
+    const convertAmount= convert.conversion_result;
+    txtBoxConvertAmount.value=convertAmount;
+
 };
