@@ -46,7 +46,7 @@
             <!-- Convert currency -->
             <label for="convertAmount" class="label-text">Convert Amount</label><br>
             <select name="convert-currency" id="convert-currency"></select>
-            <input type="text" id="convertAmount" name="convertAmount" class="champ-texte"><br>
+            <input type="text" id="convertAmount" name="convertAmount" class="champ-texte" readonly><br>
 
             <!-- Convert button -->            
             <p class="conteneur-boutons">
@@ -61,6 +61,7 @@
     <!-- Supabase et Java -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../supabaseClient.js"></script>
+    <script src="../env.js"></script>
     <script src="../currency_converter/currency_converter.js"></script>
     <script src="./chat.js"></script>
 </body>

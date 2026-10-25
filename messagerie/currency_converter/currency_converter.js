@@ -76,11 +76,16 @@ async function Convert(baseCode,convertCode,amount) {
     }
 }
 
+const isNumeric = (string) => string == Number.parseFloat(string)
 btnConvert.onclick = async (event) => {
     event.preventDefault();
 
     if(!selectBoxBase.value || !selectBoxConvert.value || !txtBoxBaseAmont.value){
         alert("Select 2 currencies and an amount to convert !");
+        return;
+    }
+    if(!isNumeric(txtBoxBaseAmont.value)){
+        alert("Please enter a valid number !");
         return;
     }
     const convert= await Convert(selectBoxBase.value,selectBoxConvert.value,txtBoxBaseAmont.value);
