@@ -31,7 +31,11 @@ form.addEventListener('submit', async function(event) {
   let result=await connect(formData.get("login"),formData.get("pwd"));
 
   if (result){
-    //change page to the home page
-    window.location.href = "./index.html";
+    sessionStorage.setItem("user", formData.get("login"));
+    Auth.onSessionChange((event, session) => {
+      if (session?.user) {
+        window.location.replace("./index.html");
+      }
+    });
   }
 });

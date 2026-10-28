@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/base.css">
     <title>Home page</title>
 </head>
+
 <body>
 
 
@@ -13,12 +15,12 @@
         <li class="nav-element"><a href="./index.html" class="active">Home</a></li>
         <li class="nav-element"><a href="./chat/chat.html">My Chats</a></li>
         <li class="nav-element"><a href="./contact/contact.html">Contact</a></li>
-        <li class="nav-element"><a href="./logout">Logout</a></li>
+        <li class="nav-element"><a id="sign-out">Logout</a></li>
         <li class="nav-element"><a href="./signin.html" title="Connect">Signin</a></li>
         <li class="nav-element"><a href="./creation_account/signup.html" title="Create an account">Signup</a></li>
     </ul>
 
-    <div class="main-interface">
+    <div id= "main-interface" class="main-interface">
         Please log in or create an account to access the email.</br>
         <p class="conteneur-boutons">
 
@@ -60,17 +62,22 @@
             <select name="convert-currency" id="convert-currency"></select>
             <input type="text" id="convert-amount" name="convert-amount" class="champ-texte" readonly><br>
 
-            <!-- Convert button -->            
+            <!-- Convert button -->
             <p class="conteneur-boutons">
                 <button for="convert" id="convert" class="bouton-bas"> Convert </button>
             </p>
-        </form> 
+        </form>
 
         <!-- close button -->
         <button id="close-box">close</button>
     </dialog>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabaseClient.js"></script>
+    <script src="auth.js"></script>
+    <script src="./utils/home.js"></script>
     <script src="./env.js"></script>
     <script src="./currency_converter/currency_converter.js"></script>
 </body>
+
 </html>
