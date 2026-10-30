@@ -15,17 +15,23 @@
         <li class="nav-element"><a href="../index.html">Home</a></li>
         <li class="nav-element"><a href="./chat.html" class="active">My Chats</a></li>
         <li class="nav-element"><a href="../contact/contact.html">Contact</a></li>
+        <li class="nav-element"><a href="#" id="link-logout">Logout</a></li>
     </ul>
 
     <div class="chat-wrapper">
+        <div class="chat-header">
+            <span id="span-channel-title" class="channel-title"># Général</span>
+            <span id="user-status" class="user-status"></span>
+        </div>
+
         <!-- Boîte blanche au milieu qui affiche les messages -->
         <div class="chat-display-box" id="chat-display-box"></div>
 
         <!-- Boîte de message en bas -->
-        <div class="aligne-en-bas">
+        <form id="form-message" class="aligne-en-bas">
             <textarea id="message-input" name="message" rows="1" placeholder="Écrivez votre message ici..."></textarea>
-            <button type="button" id="btn-send" class="btn-send" title="Envoyer"></button>
-        </div>
+            <button type="submit" id="btn-send" class="btn-send" title="Envoyer"></button>
+        </form>
     </div>
     <!-- Ouvre le boutton -->
     <button id="open-box">Curr€ncy Converter</button>
@@ -58,9 +64,11 @@
         <button id="close-box">close</button>
     </dialog>
 
-    <!-- Supabase et Java -->
+    <!-- Supabase et Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../supabaseClient.js"></script>
+    <script src="../auth.js"></script>
+    <script src="../data.js"></script>
     <script src="../env.js"></script>
     <script src="../currency_converter/currency_converter.js"></script>
     <script src="./chat.js"></script>
