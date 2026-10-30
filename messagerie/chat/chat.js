@@ -1,88 +1,210 @@
-document.addEventListener("DOMContentLoaded", () => { // Pour as que des trucs se passe avant le chargement entier de la page
+//Variables de l'état de la page
+let currentChannel = Local.readCurrentChannel();
+let currentUser = null;
+let unsubscribeMessages = null;
 
-    // Recherche des éléments comme la boite de discu, la zone de saisie et le bouton d'envoi
-    const displayBox = document.getElementById("chat-display-box") || document.querySelector(".chat-display-box, [class*='chat-display-box']");
-    const messageInput = document.getElementById("message-input") || document.querySelector(".aligne-en-bas textarea, .aligne-en-bas input[type='text']");
-    const sendBtn = document.getElementById("btn-send") || document.querySelector(".btn-send, .aligne-en-bas button");
+// Element du DOM
+const inputMessage = document.getElementById("message-input");
+const divMessages = document.getElementById("chat-display-box");
+const formMessage = document.getElementById("form-message");
+const spanChannelTitle = document.getElementById("span-channel-title");
+const linkLogout = document.getElementById("link-logout");
 
-    if (!displayBox || !messageInput || !sendBtn) {
-        console.warn("�l�ments du chat introuvables :", { displayBox, messageInput, sendBtn });
-        return;
-    }
 
-    // Fonction pour mettre l'heure actuelle (ex: transforme 14:5 en 14:05)
-    function getCurrentTime() {
-        const now = new Date();
-        const hours = String(now.getHours()).padStart(2, "0");
-        const minutes = String(now.getMinutes()).padStart(2, "0");
-        return `${hours}:${minutes}`;
-    }
+// Envoi d'un message lors de la soumission du formulaire
+formMessage.addEventListener("submit", async (event) => {
+  event.preventDefault();
 
-    // Fonction pour ajouter un message dans la boite blanche du milieu
-    function displayMessage(text, isSent = true, time = null) {
-        // Supprimer l'état vide si présent
-        const emptyState = displayBox.querySelector(".chat-empty-state");
-        if (emptyState) {
-            emptyState.remove();
-        }
+  // Verif si le user est bien connecté
+  if (!currentUser) {
+    alert("Vous devez être connecté pour envoyer un message.");
+    window.location.replace("../signin.html");
+    return;
+  }
 
-        // DVérifie si le message est envoyé ou reçu pour bien l'afficher
-        const msgElement = document.createElement("div");
-        msgElement.className = `message ${isSent ? "sent" : "received"}`;
+  // Verifie que le message n'est pas vide
+  const content = inputMessage.value.trim();
+  if (!content) return;
 
-        const bubble = document.createElement("div");
-        bubble.className = "bubble";
-        bubble.textContent = text;
+  // Enregistrement du message dans Supabase
+  const channelId = currentChannel ? currentChannel.id : null;
+  const { data, error } = await Data.sendMessage(
+    channelId,
+    content,
+    currentUser.email
+  );
 
-        const timeSpan = document.createElement("span");
-        timeSpan.className = "time";
-        timeSpan.textContent = time || getCurrentTime();
+  if (error) {
+    console.error("Erreur d'envoi :", error.message);
+    alert("Erreur lors de l'envoi du message.");
+    return;
+  }
 
-        msgElement.appendChild(bubble);
-        msgElement.appendChild(timeSpan);
-        displayBox.appendChild(msgElement);
+  // Affiche le message de l'utilisateur (en vert)
+  if (data && data.length > 0) {
+    appendMessage(data[0]);
+  }
 
-        // Défilement automatique vers le bas pour voir le dernier message envoyé
-        displayBox.scrollTop = displayBox.scrollHeight;
-    }
-
-    // Message d'accueil
-    function loadSavedMessages() {
-        displayMessage("Bonjour ! Tapez votre message dans la zone en bas puis cliquez sur le bouton ou appuyez sur Entrée pour l'envoyer.", false);
-    }
-
-    // Fonction principale d'envoi du message
-    function sendMessage() {
-        const text = messageInput.value.trim();
-        if (text === "") {
-            return;
-        }
-
-        const time = getCurrentTime();
-
-        // Afficher le message de l'utilisateur avec la bonne heure
-        displayMessage(text, true, time);
-
-        // Vider la boite de texte en bas et redonne le focus
-        messageInput.value = "";
-        messageInput.focus();
-    }
-
-    // Envoi lors du clic sur le bouton d'envoi
-    sendBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        sendMessage();
-    });
-
-    // Envoie lorsqu'on appuie sur la touche 'Entrée' dans la zone de texte
-    messageInput.addEventListener("keydown", (e) => {
-        if (e.key === "Enter" && !e.shiftKey) {
-            e.preventDefault(); // Emp�che le saut de ligne
-            sendMessage();
-        }
-    });
-
-    // Affiche le message d'accueil au chargement
-    loadSavedMessages();
-
+  // Vide la zone de texte
+  inputMessage.value = "";
+  inputMessage.focus();
 });
+
+// Envoi avec la touche Entrée
+inputMessage.addEventListener("keydown", (event) => {
+  if (event.key === "Enter" && !event.shiftKey) {
+    event.preventDefault();
+    formMessage.requestSubmit();
+  }
+});
+
+// Déconnexion lors du clic sur Logout
+if (linkLogout) {
+  linkLogout.addEventListener("click", async (event) => {
+    event.preventDefault();
+    await Auth.signOut();
+    Local.clearSession();
+    window.location.replace("../signin.html");
+  });
+}
+
+// Redirection si la session prend fin
+Auth.onSessionEnded(() => {
+  Local.clearSession();
+  window.location.replace("../signin.html");
+});
+
+// Gestion des salons
+async function loadChannels() {
+  const { data: channels, error } = await Data.fetchChannels();
+  if (error) {
+    console.error("Impossible de charger les salons :", error.message);
+    return;
+  }
+
+  // S'il y a déjà un salon dans la base, on l'utilise
+  if (channels && channels.length > 0) {
+    currentChannel = channels[0];
+    Local.writeCurrentChannel(currentChannel);
+  } else {
+    // Sinon on crée un salon par défaut "Général"
+    const { data: created } = await Data.createChannel("Général");
+    if (created && created.length > 0) {
+      currentChannel = created[0];
+      Local.writeCurrentChannel(currentChannel);
+    }
+  }
+
+  if (currentChannel) {
+    showChannelTitle(currentChannel.name);
+  }
+}
+
+function showChannelTitle(title) {
+  if (spanChannelTitle) {
+    spanChannelTitle.textContent = "# " + title;
+  }
+}
+
+//Affichage des messages
+async function loadMessages() {
+  const channelId = currentChannel ? currentChannel.id : null;
+  const { data: messages, error } = await Data.fetchMessages(channelId);
+
+  if (error) {
+    console.error("Impossible de charger les messages :", error.message);
+    return;
+  }
+
+  divMessages.replaceChildren();
+  messages.forEach((message) => {
+    displayMessage(message);
+  });
+  scrollMessages();
+}
+
+function appendMessage(message) {
+  displayMessage(message);
+  scrollMessages();
+}
+
+function displayMessage(message) {
+  // Evite d'afficher deux fois le même message
+  if (message.id && divMessages.querySelector(`[data-id="${message.id}"]`)) {
+    return;
+  }
+
+  // Vert si l'utilisateur connecté est l'auteur, gris si c'est qqn d'autre
+  const isSent = currentUser && (
+    message.user_id == currentUser.id ||
+    (message.username && currentUser.email && message.username === currentUser.email)
+  );
+
+  // Conteneur du message (sent = vert à droite, received = gris à gauche)
+  const msgElement = document.createElement("div");
+  msgElement.className = `message ${isSent ? "sent" : "received"}`;
+  if (message.id) {
+    msgElement.setAttribute("data-id", message.id);
+  }
+
+  // Nom de l'expediteur pour les messages reçus
+  if (!isSent && message.username) {
+    const authorSpan = document.createElement("span");
+    authorSpan.className = "author";
+    authorSpan.textContent = message.username;
+    msgElement.appendChild(authorSpan);
+  }
+
+  // Bulle du texte
+  const bubble = document.createElement("div");
+  bubble.className = "bubble";
+  bubble.textContent = message.content;
+
+  // Heure du message
+  const timeSpan = document.createElement("span");
+  timeSpan.className = "time";
+  timeSpan.textContent = formatTime(message.created_at);
+
+  msgElement.appendChild(bubble);
+  msgElement.appendChild(timeSpan);
+  divMessages.appendChild(msgElement);
+}
+
+function scrollMessages() {
+  divMessages.scrollTop = divMessages.scrollHeight;
+}
+
+// Transforme la date Supabase en heure lisible (ex: "14:05")
+function formatTime(dateString) {
+  if (!dateString) return "";
+  const date = new Date(dateString);
+  const hours = String(date.getHours()).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+  return `${hours}:${minutes}`;
+}
+
+
+//Verif de connexion au tout début
+async function init() {
+  // Vérifie si l'utilisateur est connecté et enregistré
+  currentUser = (await Auth.getUser()).user;
+  if (!currentUser) {
+    alert("Vous devez être connecté pour accéder au chat.");
+    window.location.replace("../signin.html");
+    return;
+  }
+
+  // Charge le salon et les anciens messages
+  await loadChannels();
+  await loadMessages();
+
+  // Ecoute les nouveaux messages en temps réel
+  const channelId = currentChannel ? currentChannel.id : null;
+  unsubscribeMessages?.();
+  unsubscribeMessages = Data.subscribeToMessages(channelId, appendMessage);
+}
+
+init();
+
+
+
