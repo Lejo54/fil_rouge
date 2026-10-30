@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => { // Pour pas que des trucs se passe avant le chargement entier de la page
+document.addEventListener("DOMContentLoaded", () => { // Pour as que des trucs se passe avant le chargement entier de la page
 
     // Recherche des éléments comme la boite de discu, la zone de saisie et le bouton d'envoi
     const displayBox = document.getElementById("chat-display-box") || document.querySelector(".chat-display-box, [class*='chat-display-box']");
