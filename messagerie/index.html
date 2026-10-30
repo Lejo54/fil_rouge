@@ -4,7 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="./images/logo.png">
     <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/form.css">
+    <link rel="stylesheet" href="./css/converter.css">
     <title>Home page</title>
 </head>
 
@@ -20,7 +23,7 @@
         <li class="nav-element"><a href="./creation_account/signup.html" title="Create an account">Signup</a></li>
     </ul>
 
-    <div id= "main-interface" class="main-interface">
+    <div id="main-interface" class="main-interface">
         Please log in or create an account to access the email.</br>
         <p class="conteneur-boutons">
 
@@ -42,34 +45,39 @@
     </div>
 
     <!-- open button -->
-    <button id="open-box">Curr€ncy Converter</button>
+    <button id="open-box" class="converter-button">Curr€ncy Converter</button>
 
     <!-- box default hidden -->
-    <dialog id="box-converter">
-        <h2>Currency converter</h2>
+    <dialog id="box-converter" class="box-converter">
         <!-- Currency form -->
-        <form name="Convert" class="gros-carre">
+        <div class="form-converter">
+            <form name="Convert" class="gros-carre" id="converter">
 
-            <h2 class="rectangle-haut">Currency converter</h2>
+                <h2 class="rectangle-haut">Currency converter</h2>
 
-            <!-- Base currency -->
-            <label for="base-amount" class="label-text">Base Amount</label><br>
-            <select name="base-currency" id="base-currency"></select>
-            <input type="text" id="base-amount" name="base-amount" class="champ-texte"><br>
+                <!-- Base currency -->
+                <label for="base-amount" class="label-text">Base Amount</label><br>
+                <div class="select-currency">
+                    <select name="base-currency" id="base-currency"></select>
+                </div>
+                <input type="text" id="base-amount" name="base-amount" class="champ-texte"><br>
 
-            <!-- Convert currency -->
-            <label for="convert-amount" class="label-text">Convert Amount</label><br>
-            <select name="convert-currency" id="convert-currency"></select>
-            <input type="text" id="convert-amount" name="convert-amount" class="champ-texte" readonly><br>
+                <!-- Convert currency -->
+                <label for="convert-amount" class="label-text">Convert Amount</label><br>
+                <div class="select-currency">
+                    <select name="convert-currency" id="convert-currency"></select>
+                </div>
+                <input type="text" id="convert-amount" name="convert-amount" class="champ-texte" readonly><br>
 
-            <!-- Convert button -->
-            <p class="conteneur-boutons">
-                <button for="convert" id="convert" class="bouton-bas"> Convert </button>
-            </p>
-        </form>
-
-        <!-- close button -->
-        <button id="close-box">close</button>
+                <!-- buttons -->
+                <p class="conteneur-boutons">
+                    <!-- close button -->
+                    <button type="button" id="close-box" class="bouton-bas">Close</button>
+                    <!-- convert button -->
+                    <button for="convert" id="convert" class="bouton-bas"> Convert </button>
+                </p>
+            </form>
+        </div>
     </dialog>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
