@@ -50,8 +50,33 @@ li.nav-element a:hover:not(.active) {
 
 .pub {
   width: 100%;
-  height: 100%;
-  background-image: url("../images/pub1.png");
+  height: 12rem;
+  background-image: none;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  max-height: 48.2rem;
+  animation-duration: 2s;
+  animation-name: clignoter;
+  animation-iteration-count: infinite;
+  transition: none;
+}
+@keyframes clignoter {
+  0% {
+    opacity: 1;
+  }
+  40% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+#pub-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0rem;
+  list-style: none;
 }
 
 @media (max-width: 64rem) {
