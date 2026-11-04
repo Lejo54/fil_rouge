@@ -1,11 +1,12 @@
-body {
+.form {
 	display:flex;
-	justify-content: center;
+  align-items: center;
+  justify-content: center;
+  min-height: 55rem;
 }
 /*Signin/Signup/Converter interface*/
 
 .gros-carre {
-  margin-top: 15rem;
   width: 90rem; /* Permet une meilleur adaptation PC/Téléphone */
   max-width: 300px;
   height: 25rem;
@@ -128,4 +129,8 @@ body {
 .bouton-bas:active {
   box-shadow: none;
   transform: translateY(0);
+}
+
+#signup,#signup>button{
+  background-color: #4d85ce;
 }

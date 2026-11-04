@@ -34,7 +34,7 @@ form.addEventListener('submit', async function(event) {
     sessionStorage.setItem("user", formData.get("login"));
     Auth.onSessionChange((event, session) => {
       if (session?.user) {
-        window.location.replace("./index.html");
+        window.location.replace("./chat/chat.html");
       }
     });
   }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,33 +15,37 @@
   <script src="auth.js"></script>
   <script src="./connection/connection.js" defer></script>
 </head>
+
 <body>
 
-<!-- Sign in form -->
-  <form id="Connect" class="gros-carre">
+  <div class="form">
+    <!-- Sign in form -->
+    <form id="Connect" class="gros-carre">
 
-    <h2 class="rectangle-haut">Connection</h2>
+      <h2 class="rectangle-haut">Connection</h2>
 
-    <!-- User login -->
-    <label for="login" class="label-text">Login</label><br>
-    <input type="text" id="login" name="login" class="champ-texte"><br>
+      <!-- User login -->
+      <label for="login" class="label-text">Login</label><br>
+      <input type="text" id="login" name="login" class="champ-texte"><br>
 
-    <!-- User password -->
-    <label for="pwd" class="label-text">Password</label><br>
-    <input type="password" id="pwd" name="pwd" class="champ-texte"><br>
+      <!-- User password -->
+      <label for="pwd" class="label-text">Password</label><br>
+      <input type="password" id="pwd" name="pwd" class="champ-texte"><br>
 
-    <!-- Buttons -->
-    <p class="conteneur-boutons">
-      <!-- Go to signup page -->
-      <label for="signup" class="bouton-bas">
-        <button>
-          <a href="./creation_account/signup.html" title="Create an account">Signup</a> 
-        </button>
-      </label>
+      <!-- Buttons -->
+      <p class="conteneur-boutons">
+        <!-- Go to signup page -->
+        <label for="signup" class="bouton-bas" id="signup">
+          <button>
+            <a href="./creation_account/signup.html" title="Create an account">Signup</a>
+          </button>
+        </label>
 
-      <!-- Submit form -->
-      <input type="submit" value="Submit" class="bouton-bas">
-    </p>
-  </form> 
+        <!-- Submit form -->
+        <input type="submit" value="Submit" class="bouton-bas">
+      </p>
+    </form>
+  </div>
 </body>
+
 </html>
