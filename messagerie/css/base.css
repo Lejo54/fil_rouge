@@ -6,11 +6,11 @@ body {
   cursor: var(--cursor);
   overflow-x: hidden;
   overflow-y: auto;
-  height:auto;
+  height: auto;
 }
 
 .main-interface {
-  z-index: 1; 
+  z-index: 1;
   height: 60rem;
   width: 100%;
   background-color: #f1f1f1;
@@ -26,7 +26,7 @@ ul.nav-bar {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  width: 200px;
+  width: 12.5rem;
   height: auto;
   background-color: #f1f1f1;
 }
@@ -34,7 +34,7 @@ ul.nav-bar {
 li.nav-element a {
   display: block;
   color: black;
-  padding: 8px 16px;
+  padding: 0.5rem 1rem;
   text-decoration: none;
 }
 
@@ -52,4 +52,48 @@ li.nav-element a:hover:not(.active) {
   width: 100%;
   height: 100%;
   background-image: url("../images/pub1.png");
+}
+
+@media (max-width: 64rem) {
+  ul.nav-bar {
+    width: 10rem;
+  }
+}
+
+@media (max-width: 48rem) {
+  body {
+    flex-direction: column;
+    padding-top: 4rem;
+  }
+
+  ul.nav-bar {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+  }
+
+  li.nav-element {
+    flex: 1 0 auto;
+  }
+
+  li.nav-element a {
+    text-align: center;
+    white-space: nowrap;
+    padding: 0.75rem 0.875rem;
+  }
+
+  .main-interface {
+    height: auto;
+    min-height: 60vh;
+    margin-left: 0;
+    padding: 1rem;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 30rem) {
+  .main-interface {
+    padding: 0.75rem;
+  }
 }
