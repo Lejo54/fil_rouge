@@ -38,36 +38,36 @@ const Data = {
     };
   },
 
-  // Recup les messages d'un salon (ou tous les messages de la base)
+  // Recup les messages d'un salon (strictement filtré par salon)
   async fetchMessages(channelId) {
-    let query = _supabase
-      .from("messages")
-      .select("*")
-      .order("created_at", { ascending: true });
-
-    if (channelId) {
-      query = query.eq("channel_id", channelId);
+    if (!channelId) {
+      return { data: [], error: null };
     }
 
-    return await query;
+    return await _supabase
+      .from("messages")
+      .select("*")
+      .eq("channel_id", channelId)
+      .order("created_at", { ascending: true });
   },
 
-  // Enregistre un message dans la base de données Supabase
+  // Enregistre un message dans la base de données Supabase lié au salon
   async sendMessage(channelId, content, username) {
     const { user } = await Auth.getUser();
     if (!user) {
       return { data: null, error: new Error("Utilisateur non connecté") };
     }
 
+    if (!channelId) {
+      return { data: null, error: new Error("Aucun salon sélectionné") };
+    }
+
     const payload = {
       content: content,
       username: username || user.email || "Anonyme",
-      user_id: user.id
+      user_id: user.id,
+      channel_id: channelId
     };
-
-    if (channelId) {
-      payload.channel_id = channelId;
-    }
 
     return await _supabase
       .from("messages")
@@ -129,4 +129,3 @@ const Local = {
     localStorage.removeItem("current_channel");
   }
 };
-
