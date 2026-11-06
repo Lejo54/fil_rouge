@@ -19,20 +19,44 @@
     </ul>
 
     <div class="chat-wrapper">
-        <div class="chat-header">
-            <span id="span-channel-title" class="channel-title"># Général</span>
-            <span id="user-status" class="user-status"></span>
+        <div class="chat-container">
+            <!-- Sidebar des salons à gauche du chat -->
+            <aside class="channels-sidebar">
+                <div class="channels-header">
+                    <span class="channels-header-title">Salons</span>
+                    <button id="btn-add-channel" class="btn-add-channel" type="button" title="Créer un nouveau salon">+</button>
+                </div>
+
+                <!-- Barre de recherche de salons -->
+                <div class="channels-search-box">
+                    <input type="text" id="channels-search-input" placeholder="Rechercher un salon..." autocomplete="off">
+                </div>
+
+                <!-- Liste des salons disponibles -->
+                <ul id="channels-list" class="channels-list">
+                    <!-- Liens des salons injectés dynamiquement -->
+                </ul>
+            </aside>
+
+            <!-- Zone de discussion à droite -->
+            <main class="chat-main">
+                <div class="chat-header">
+                    <span id="span-channel-title" class="channel-title"># Général</span>
+                    <span id="user-status" class="user-status"></span>
+                </div>
+
+                <!-- Boîte blanche au milieu qui affiche les messages -->
+                <div class="chat-display-box" id="chat-display-box"></div>
+
+                <!-- Boîte de message en bas -->
+                <form id="form-message" class="aligne-en-bas">
+                    <textarea id="message-input" name="message" rows="1" placeholder="Écrivez votre message ici..."></textarea>
+                    <button type="submit" id="btn-send" class="btn-send" title="Envoyer"></button>
+                </form>
+            </main>
         </div>
-
-        <!-- Boîte blanche au milieu qui affiche les messages -->
-        <div class="chat-display-box" id="chat-display-box"></div>
-
-        <!-- Boîte de message en bas -->
-        <form id="form-message" class="aligne-en-bas">
-            <textarea id="message-input" name="message" rows="1" placeholder="Écrivez votre message ici..."></textarea>
-            <button type="submit" id="btn-send" class="btn-send" title="Envoyer"></button>
-        </form>
     </div>
+
     <!-- Ouvre le boutton -->
     <button id="open-box">Curr€ncy Converter</button>
 
