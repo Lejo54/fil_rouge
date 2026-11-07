@@ -12,20 +12,18 @@
 </head>
 
 <body>
-
-
-    <ul class="nav-bar">
+    <ul id="nav-bar" class="nav-bar">
         <li class="nav-element"><a href="./index.html" class="active">Home</a></li>
         <li class="nav-element"><a href="./chat/chat.html">My Chats</a></li>
         <li class="nav-element"><a id="sign-out">Logout</a></li>
-        <li class="nav-element"><a href="./signin.html" title="Connect">Signin</a></li>
-        <li class="nav-element"><a href="./creation_account/signup.html" title="Create an account">Signup</a></li>
+        <li id="nav-signin" class="nav-element"><a href="./signin.html" title="Connect">Signin</a></li>
+        <li id="nav-signup" class="nav-element"><a href="./creation_account/signup.html" title="Create an account">Signup</a></li>
         <li id="pub-list"> </li>
     </ul>
 
     <div id="main-interface" class="main-interface">
-        Please log in or create an account to access the email.</br>
-        <p class="conteneur-boutons">
+        <span id="main-text"></span>
+        <p id="conteneur-boutons" class="conteneur-boutons">
 
             <!-- Go to signin page -->
             <label for="signin" class="bouton-bas">
