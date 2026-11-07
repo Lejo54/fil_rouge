@@ -1,39 +1,40 @@
 .form {
-	display:flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   min-height: 55rem;
+  flex: 1;
 }
 /*Signin/Signup/Converter interface*/
 
 .gros-carre {
   width: 90rem; /* Permet une meilleur adaptation PC/Téléphone */
-  max-width: 300px;
+  max-width: 18.75rem;
   height: 25rem;
-  background-color: #c3fbe7;
+  background-color: var(--vert-carte);
   display: flex;
   flex-direction: column;
   align-items: center; /* Centre tous a l'horizontal */
   justify-content: space-between; /* Espacement vertical fluide */
-	border-radius: 10px;
+  border-radius: 0.625rem;
   padding-top: 0rem;
   padding-bottom: 1rem;
   box-sizing: border-box; /* Inclut le padding dans les 300px de hauteur */
-  border: 1px solid #ccc;
+  border: 0.0625rem solid #ccc;
 }
 
 /* En-tête Connection */
 .rectangle-haut {
   width: 85%;
   height: 2rem;
-  background-color: #6ab197;
+  background-color: var(--vert-entete);
   color: white;
-  border-radius: 8px;
+  border-radius: 0.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
   font-family: serif;
-  font-size: 22px;
+  font-size: 1.375rem;
 }
 
 /* Box ID et MDP */
@@ -43,30 +44,30 @@
   height: 2rem;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
-  background-color: #6ab197;
+  background-color: var(--vert-entete);
   color: white;
-  border-radius: 8px;
+  border-radius: 0.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
   font-family: serif;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 1.125rem;
 }
 
 .champ-texte {
   width: 15rem;
   height: 2rem;
-  background-color: #86cdb3;
+  background-color: var(--vert-champ);
   border: none;
   color: white;
   text-align: center;
-  font-size: 16px;
+  font-size: 1rem;
   outline: none;
-}
 
-.champ-texte::placeholder {
-  color: white; /* Met le texte en blanc car il s affiche en gris clair de base et c'est peu lisible sur du gris clair */
+  &::placeholder {
+    color: white; /* Met le texte en blanc car il s affiche en gris clair de base et c'est peu lisible sur du gris clair */
+  }
 }
 
 /* Alignement des 2 boutons (CC et SC) */
@@ -75,8 +76,12 @@
   max-width: 20rem; /* un peu plus large : 2 x 5rem + gap */
   margin: 1rem auto 0; /* centre horizontalement + espace sous le texte */
   display: flex;
-  gap: 10px;
+  gap: 0.625rem;
   justify-content: center;
+
+  &[hidden] {
+    display: none;
+  }
 }
 
 .bouton-bas,
@@ -86,14 +91,16 @@
   max-width: 10rem;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
-  background-color: #26916a;
+  background-color: var(--vert-bouton);
   border: none;
   color: white;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 1rem;
   cursor: pointer;
-  border-radius: 10px;
-	transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+  border-radius: 0.625rem;
+  transition:
+    color 300ms cubic-bezier(0.23, 1, 0.32, 1),
+    transform 300ms cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .bouton-bas > button,
@@ -116,21 +123,24 @@
   text-decoration: none;
 }
 
-.bouton-bas:hover,
-.bouton-bas > button > a:hover {
-  color: #06402b; /* Le texte devient bleu quand souris passe dessus */
-	transform: translateY(-2px);
+.bouton-bas {
+  &:hover,
+  & > button > a:hover {
+    color: var(--vert-texte-hover); /* Le texte devient bleu quand souris passe dessus */
+    transform: translateY(-0.125rem);
+  }
+
+  &:disabled {
+    pointer-events: none;
+  }
+
+  &:active {
+    box-shadow: none;
+    transform: translateY(0);
+  }
 }
 
-.bouton-bas:disabled {
-  pointer-events: none;
-}
-
-.bouton-bas:active {
-  box-shadow: none;
-  transform: translateY(0);
-}
-
-#signup,#signup>button{
-  background-color: #4d85ce;
+#signup,
+#signup > button {
+  background-color: var(--bleu-signup);
 }

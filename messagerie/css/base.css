@@ -1,3 +1,16 @@
+:root {
+  --vert-principal: #04aa6d;
+  --vert-principal-hover: #038f5c;
+  --vert-bouton: #26916a;
+  --vert-entete: #6ab197;
+  --vert-champ: #86cdb3;
+  --vert-carte: #c3fbe7;
+  --vert-texte-hover: #06402b;
+  --bleu-signup: #4d85ce;
+  --gris-fond: #f1f1f1;
+  --gris-texte: #888888;
+}
+
 body {
   display: flex;
   background-image: url("../images/background.jpg");
@@ -13,11 +26,9 @@ body {
   z-index: 1;
   height: 60rem;
   width: 100%;
-  background-color: #f1f1f1;
-  margin: 0;
+  background-color: var(--gris-fond);
+  margin: 0 0 0 1rem;
   padding: 0;
-  margin-left: 1rem;
-  margin-right: 0rem;
   text-align: center;
 }
 
@@ -28,7 +39,7 @@ ul.nav-bar {
   padding: 0;
   width: 12.5rem;
   height: auto;
-  background-color: #f1f1f1;
+  background-color: var(--gris-fond);
 }
 
 li.nav-element a {
@@ -36,19 +47,20 @@ li.nav-element a {
   color: black;
   padding: 0.5rem 1rem;
   text-decoration: none;
-}
 
-li.nav-element a.active {
-  background-color: #04aa6d;
-  color: white;
-}
+  &.active {
+    background-color: var(--vert-principal);
+    color: white;
+  }
 
-li.nav-element a:hover:not(.active) {
-  background-color: #555555;
-  color: white;
+  &:hover:not(.active) {
+    background-color: #555555;
+    color: white;
+  }
 }
 
 .pub {
+  display: block;
   width: 100%;
   height: 12rem;
   background-image: none;
@@ -56,10 +68,8 @@ li.nav-element a:hover:not(.active) {
   background-repeat: no-repeat;
   background-position: center;
   max-height: 48.2rem;
-  animation-duration: 2s;
-  animation-name: clignoter;
-  animation-iteration-count: infinite;
-  transition: none;
+  cursor: pointer;
+  animation: clignoter 2s infinite;
 }
 @keyframes clignoter {
   0% {
