@@ -4,6 +4,7 @@ const btnSignOut = document.getElementById("sign-out");
 const mainText = document.getElementById("main-text");
 const nav = document.getElementById("nav-bar");
 const mainButtons = document.getElementById("conteneur-boutons");
+const mainGif = document.getElementById("main-gif");
 
 function updateNav(session) {
   const isConnected = Boolean(session);
@@ -11,11 +12,13 @@ function updateNav(session) {
   navSignup.hidden = isConnected;
   btnSignOut.parentElement.hidden = !isConnected;
   mainButtons.hidden = isConnected;
+  mainGif.hidden = !isConnected;
   mainText.replaceChildren();
 
   if (isConnected) {
     mainText.append(
-      `Welcome back ! You are logged in as ${session.user.email}.`,
+      "Welcome back !",document.createElement("br")
+      ,`You are logged in as ${session.user.email}.`,
       document.createElement("br"),
       "You can chat with your friends and convert your money !"
     );

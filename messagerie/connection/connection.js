@@ -33,7 +33,7 @@ form.addEventListener('submit', async function(event) {
   if (result){
     Auth.onSessionChange((event, session) => {
       if (session?.user) {
-        window.location.replace("./chat/chat.html");
+        window.location.replace("index.html");
       }
     });
   }
