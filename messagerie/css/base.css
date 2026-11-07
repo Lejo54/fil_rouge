@@ -84,15 +84,29 @@ li.nav-element a {
 
 .pub {
   display: block;
-  width: 100%;
   height: 12rem;
-  background-image: none;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  max-height: 48.2rem;
   cursor: pointer;
   animation: clignoter 2s infinite;
+  max-width: 100%;
+
+  & img {
+    display: block;
+    max-width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  &:nth-child(2) {
+    animation-delay: 0.5s;
+  }
+
+  &:nth-child(3) {
+    animation-delay: 1s;
+  }
+
+  &:nth-child(4) {
+    animation-delay: 1.5s;
+  }
 }
 @keyframes clignoter {
   0% {
