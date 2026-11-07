@@ -39,6 +39,6 @@ form.addEventListener('submit', async (event) => {
 
   if (result) {
     //change page to the signin page
-    window.location.href = "../signin.html";
+    window.location.replace("../connection/signin.html");
   }
 });

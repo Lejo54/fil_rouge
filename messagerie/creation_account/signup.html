@@ -9,10 +9,10 @@
   <link rel="stylesheet" href="../css/form.css">
   <title>Messagerie: Create Account</title>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
   <!-- La ligne au dessus permet de récupérer le fichier officiel supabase pour faire focntionner -->
-  <script src="../supabaseClient.js"></script>
-  <script src="../auth.js"></script>
+  <script src="../utils/supabaseClient.js" defer></script>
+  <script src="../utils/auth.js" defer></script>
   <script src="./creation.js" defer></script>
 </head>
 
@@ -39,9 +39,9 @@
       <!-- Buttons -->
       <p class="conteneur-boutons">
         <!-- Go to signin page -->
-        <label for="signin" class="bouton-bas">
+        <label for="signin" class="bouton-bas" id="signin">
           <button>
-            <a href="../signin.html" title="Connect">Signin</a>
+            <a href="../connection/signin.html" title="Connect">Signin</a>
           </button>
         </label>
 

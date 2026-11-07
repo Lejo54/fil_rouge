@@ -139,6 +139,8 @@
 }
 
 #signup,
-#signup > button {
+#signup > button,
+#signin,
+#signin > button{
   background-color: var(--bleu-signup);
 }

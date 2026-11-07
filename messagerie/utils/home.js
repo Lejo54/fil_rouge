@@ -41,7 +41,7 @@ btnSignOut.onclick = async () => {
 
   Auth.onSessionEnded(() => {
     sessionStorage.clear();
-    window.location.replace("./signin.html");
+    window.location.replace("./connection/signin.html");
   });
 
 };

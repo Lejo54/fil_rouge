@@ -4,16 +4,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/x-icon" href="./images/logo.png">
-  <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/form.css">
+  <link rel="icon" type="image/x-icon" href="../images/logo.png">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/form.css">
   <title>Messagerie: Connect</title>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <!-- La ligne au dessus permet de récupérer le fichier officiel supabase pour faire focntionner -->
-  <script src="supabaseClient.js"></script>
-  <script src="auth.js"></script>
-  <script src="./connection/connection.js" defer></script>
+  <script src="../utils/supabaseClient.js" defer></script>
+  <script src="../utils/auth.js" defer></script>
+  <script src="./connection.js" defer></script>
 </head>
 
 <body>
@@ -37,7 +37,7 @@
         <!-- Go to signup page -->
         <label for="signup" class="bouton-bas" id="signup">
           <button>
-            <a href="./creation_account/signup.html" title="Create an account">Signup</a>
+            <a href="../creation_account/signup.html" title="Create an account">Signup</a>
           </button>
         </label>
 
