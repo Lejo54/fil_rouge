@@ -38,4 +38,7 @@ form.addEventListener('submit', async function(event) {
       }
     });
   }
+  else{
+    alert("Wrong login or password !")
+  }
 });
