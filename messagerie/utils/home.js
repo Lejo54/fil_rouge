@@ -17,7 +17,7 @@ function updateNav(session) {
     mainText.append(
       `Welcome back ! You are logged in as ${session.user.email}.`,
       document.createElement("br"),
-      "You can chat with your friends and convert your money"
+      "You can chat with your friends and convert your money !"
     );
   } else {
     mainText.append("Please log in or create an account to access the email.");

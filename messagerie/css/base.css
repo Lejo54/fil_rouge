@@ -9,10 +9,12 @@
   --bleu-signup: #4d85ce;
   --gris-fond: #f1f1f1;
   --gris-texte: #888888;
+  --police: system-ui, "Segoe UI", Roboto, Arial, sans-serif;
 }
 
 body {
   display: flex;
+  font-family: var(--police);
   background-image: url("../images/background.jpg");
   background-size: cover;
   background-attachment: fixed;
@@ -20,6 +22,13 @@ body {
   overflow-x: hidden;
   overflow-y: auto;
   height: auto;
+}
+
+button,
+input,
+textarea,
+select {
+  font-family: inherit;
 }
 
 .main-interface {
@@ -30,6 +39,7 @@ body {
   margin: 0 0 0 1rem;
   padding: 0;
   text-align: center;
+  font-size: 2rem;
 }
 
 /* Navigation Bar*/
