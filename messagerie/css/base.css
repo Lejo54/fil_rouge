@@ -138,6 +138,9 @@ li.nav-element a {
 }
 
 @media (max-width: 30rem) {
+   #pub-list {
+    display: none;
+  }
   .main-interface {
     padding: 0.75rem;
   }
