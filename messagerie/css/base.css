@@ -22,7 +22,7 @@ body {
   cursor: var(--cursor); /* NOTE: --cursor is not defined in :root, so this has no effect */
   overflow-x: hidden;
   overflow-y: auto;
-  min-height: 100vh;
+  min-height: 98vh;
 }
 
 button,
