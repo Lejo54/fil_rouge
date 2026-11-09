@@ -7,15 +7,15 @@ Dans une équipe de 2 ([**Joseph Cuiller**](https://github.com/Lejo54) et [**Art
 
 ## Contraintes
 <div align="center">
-  Nous avions comme contraintes d'utiliser uniquement HTML/CSS/JavaScript vanilla ainsi qu'une base de donnée Supabase.<br><br>
+  Nous avions comme contraintes d'utiliser uniquement HTML/CSS/JavaScript vanilla ainsi qu'une base de donnée Supabase. Le site est herbergé sur vercel.<br><br>
 
-  [![My Skills](https://skillicons.dev/icons?i=html,css,js,supabase)](https://skillicons.dev)
+  [![My Skills](https://skillicons.dev/icons?i=html,css,js,supabase,vercel)](https://skillicons.dev)
 
 </div>
 
 ## Utilisation
 ### En ligne
-  Cliquez sur ce [**lien**](https://filrouge-messagerie.vercel.app/)
+  Cliquez sur ce [**lien**](https://filrouge-messagerie.vercel.app/) qui mène au site web hébergé sur vercel.
 ### Local
 - Téléchargement
   - Vous pouvez télécharger le dossier en zip puis dézipper-le dans le fichier souhaité 
