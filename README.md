@@ -33,8 +33,12 @@ Dans une équipe de 2 ([**Joseph Cuiller**](https://github.com/Lejo54) et [**Art
 
 ## Screenshoots de l'application
 
+<div align="center">
+
 ### Page d'accueil
 ![My Skills](./messagerie/images/home.png)
 
 ### Page de chat
 ![My Skills](./messagerie/images/chat.png)
+
+</div>

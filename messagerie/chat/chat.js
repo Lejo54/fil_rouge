@@ -311,7 +311,7 @@ formMessage.addEventListener("submit", async (event) => {
   // Make sure the user is logged in
   if (!currentUser) {
     alert("Vous devez être connecté pour envoyer un message.");
-    window.location.replace("../signin.html");
+    window.location.replace("../connection/signin.html");
     return;
   }
 
