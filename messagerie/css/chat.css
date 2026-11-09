@@ -1,10 +1,10 @@
-/* Reset & structure de la page */
+/* Page reset & structure */
 body {
   min-height: calc(100vh - 1rem);
   box-sizing: border-box;
 }
 
-/* Container global pour centrer le chat dans la page */
+/* Global wrapper that centers the chat in the page */
 .chat-wrapper {
   flex: 1;
   min-height: calc(100vh - 1rem);
@@ -17,7 +17,7 @@ body {
   gap: 1rem;
 }
 
-/* Container avec la sidebar des salons à gauche et la zone de chat à droite */
+/* Container with the channels sidebar on the left and the chat area on the right */
 .chat-container {
   display: flex;
   flex-direction: row;
@@ -29,7 +29,7 @@ body {
   box-sizing: border-box;
 }
 
-/* Sidebar des salons à gauche */
+/* Channels sidebar (left) */
 .channels-sidebar {
   width: 15.625rem;
   min-width: 13.75rem;
@@ -45,7 +45,7 @@ body {
   gap: 0.75rem;
 }
 
-/* En-tête de la sidebar des salons */
+/* Sidebar header */
 .channels-header {
   display: flex;
   justify-content: space-between;
@@ -60,7 +60,7 @@ body {
   color: #2b3a55;
 }
 
-/* Bouton + pour ajouter un salon */
+/* "+" button to add a channel */
 .btn-add-channel {
   background-color: var(--vert-principal);
   color: white;
@@ -90,7 +90,7 @@ body {
   }
 }
 
-/* Barre de recherche des salons */
+/* Channel search bar */
 .channels-search-box {
   width: 100%;
 
@@ -114,7 +114,7 @@ body {
   }
 }
 
-/* Liste des salons scrollable */
+/* Scrollable channel list */
 .channels-list {
   list-style: none;
   margin: 0;
@@ -144,7 +144,7 @@ body {
   }
 }
 
-/* Style de chaque salon dans la liste */
+/* Style of each channel in the list */
 .channel-item {
   display: flex;
   align-items: center;
@@ -203,7 +203,7 @@ body {
   padding: 1.5rem 0.5rem;
 }
 
-/* Zone principale du chat à droite */
+/* Main chat area (right) */
 .chat-main {
   flex: 1;
   max-width: 37.5rem;
@@ -215,8 +215,7 @@ body {
   box-sizing: border-box;
 }
 
-/* Entête du chat (Titre salon et statut utilisateur) */
-/* Entête du chat (Titre salon et statut utilisateur) */
+/* Chat header (channel title and user status) */
 .chat-header {
   width: 100%;
   display: flex;
@@ -253,7 +252,7 @@ body {
   }
 }
 
-/* Boîte blanche principale au milieu (zone d'affichage des messages) */
+/* Main white box in the middle (message display area) */
 .chat-display-box {
   background-color: #ffffff;
   border-radius: 1rem;
@@ -269,7 +268,7 @@ body {
   gap: 0.75rem;
   scroll-behavior: smooth;
 
-  /* Style de défilement pour la boîte blanche */
+  /* Custom scrollbar for the white box */
   &::-webkit-scrollbar {
     width: 0.375rem;
   }
@@ -289,7 +288,7 @@ body {
   }
 }
 
-/* État vide si aucun message */
+/* Empty state when there is no message */
 .chat-empty-state {
   display: flex;
   flex-direction: column;
@@ -307,13 +306,13 @@ body {
   font-size: 2.5rem;
 }
 
-/* Styles des bulles pour messages */
+/* Message bubble styles */
 .message {
   display: flex;
   flex-direction: column;
   max-width: 75%;
 
-  /* Nom de l'expéditeur */
+  /* Sender name */
   & .author {
     font-size: 0.75rem;
     font-weight: bold;
@@ -322,7 +321,7 @@ body {
     margin-left: 0.375rem;
   }
 
-  /* Message envoyé par l'utilisateur */
+  /* Message sent by the current user (green, right-aligned) */
   &.sent {
     align-self: flex-end;
 
@@ -353,7 +352,7 @@ body {
     }
   }
 
-  /* Message reçu (quelqu'un d'autre qui écrit) -> GRIS */
+  /* Received message (written by someone else) -> GRAY */
   &.received {
     align-self: flex-start;
 
@@ -378,7 +377,7 @@ body {
   }
 }
 
-/* Boîte de message en bas */
+/* Message input box at the bottom */
 .aligne-en-bas {
   display: flex;
   align-items: center;
@@ -392,7 +391,7 @@ body {
   box-sizing: border-box;
   margin: 0;
 
-  /* Zone de saisie (input ou textarea) */
+  /* Input area (input or textarea) */
   & textarea,
   & input[type="text"] {
     flex: 1;
@@ -410,7 +409,7 @@ body {
     }
   }
 
-  /* Bouton d'envoi complètement vert */
+  /* Fully green send button */
   & .btn-send,
   & button {
     background-color: var(--vert-principal);
@@ -436,7 +435,7 @@ body {
   }
 }
 
-/* Adaptation pour écrans plus petits */
+/* Adaptation for smaller screens */
 @media (max-width: 51.25rem) {
   .chat-wrapper {
     min-height: 0;

@@ -23,35 +23,35 @@
 
     <div class="chat-wrapper">
         <div class="chat-container">
-            <!-- Sidebar des salons à gauche du chat -->
+            <!-- Channels sidebar, left of the chat -->
             <aside class="channels-sidebar">
                 <div class="channels-header">
                     <span class="channels-header-title">Salons</span>
                     <button id="btn-add-channel" class="btn-add-channel" type="button" title="Créer un nouveau salon">+</button>
                 </div>
 
-                <!-- Barre de recherche de salons -->
+                <!-- Channel search bar -->
                 <div class="channels-search-box">
                     <input type="text" id="channels-search-input" placeholder="Rechercher un salon..." autocomplete="off">
                 </div>
 
-                <!-- Liste des salons disponibles -->
+                <!-- List of available channels -->
                 <ul id="channels-list" class="channels-list">
-                    <!-- Liens des salons injectés dynamiquement -->
+                    <!-- Channel items injected dynamically by chat.js -->
                 </ul>
             </aside>
 
-            <!-- Zone de discussion à droite -->
+            <!-- Chat area, on the right -->
             <main class="chat-main">
                 <div class="chat-header">
                     <span id="span-channel-title" class="channel-title"># Général</span>
                     <span id="user-status" class="user-status"></span>
                 </div>
 
-                <!-- Boîte blanche au milieu qui affiche les messages -->
+                <!-- White box in the middle displaying the messages -->
                 <div class="chat-display-box" id="chat-display-box"></div>
 
-                <!-- Boîte de message en bas -->
+                <!-- Message input box at the bottom -->
                 <form id="form-message" class="aligne-en-bas">
                     <textarea id="message-input" name="message" rows="1" placeholder="Écrivez votre message ici..."></textarea>
                     <button type="submit" id="btn-send" class="btn-send" title="Envoyer"></button>
@@ -96,7 +96,7 @@
         </div>
     </dialog>
 
-    <!-- Supabase et Scripts -->
+    <!-- Supabase and scripts (order matters: each file relies on globals defined by the previous ones) -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../utils/supabaseClient.js"></script>
     <script src="../utils/auth.js"></script>

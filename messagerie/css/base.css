@@ -1,3 +1,4 @@
+/* Color palette and font. Names are French: vert = green, bleu = blue, gris = gray, police = font */
 :root {
   --vert-principal: #04aa6d;
   --vert-principal-hover: #038f5c;
@@ -18,7 +19,7 @@ body {
   background-image: url("../images/background.jpg");
   background-size: cover;
   background-attachment: fixed;
-  cursor: var(--cursor);
+  cursor: var(--cursor); /* NOTE: --cursor is not defined in :root, so this has no effect */
   overflow-x: hidden;
   overflow-y: auto;
   height: auto;
@@ -82,6 +83,7 @@ li.nav-element a {
   }
 }
 
+/* Ad banners: blinking animation ("clignoter"), staggered with animation-delay */
 .pub {
   display: block;
   height: 12rem;
@@ -126,12 +128,14 @@ li.nav-element a {
   list-style: none;
 }
 
+/* Tablets */
 @media (max-width: 64rem) {
   ul.nav-bar {
     width: 10rem;
   }
 }
 
+/* Phones: the nav bar becomes a horizontal strip above the content */
 @media (max-width: 48rem) {
   body {
     flex-direction: column;
@@ -164,6 +168,7 @@ li.nav-element a {
   }
 }
 
+/* Small phones: hide the ads */
 @media (max-width: 30rem) {
    #pub-list {
     display: none;

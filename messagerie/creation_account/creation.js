@@ -1,5 +1,8 @@
+// Sign-up page logic: validates the form, creates the account with Supabase
+// and redirects to the sign-in page. Relies on the global `Auth` (auth.js).
+
 async function createAccount(accountId, accountPwd, confirmPwd) {
-  //Verify data
+  // Validate input
   if (typeof accountId !== 'string' || typeof accountPwd !== 'string' || typeof confirmPwd !== 'string') {
     alert("Wrong type !")
     return false;
@@ -9,7 +12,7 @@ async function createAccount(accountId, accountPwd, confirmPwd) {
     return false;
   }
 
-  //Verify password
+  // Check that both passwords match
   if (accountPwd !== confirmPwd) {
     alert("Password don't match !")
     return false;
@@ -38,7 +41,7 @@ form.addEventListener('submit', async (event) => {
   let result = await createAccount(formData.get("login"), formData.get("pwd"), formData.get("pwd2"));
 
   if (result) {
-    //change page to the signin page
+    // Go to the sign-in page after a successful sign-up
     window.location.replace("../connection/signin.html");
   }
 });

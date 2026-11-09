@@ -1,7 +1,8 @@
-//Gestion des données Supabase pour le Chat
+// Supabase data layer for the chat (channels and messages).
+// Relies on the globals `_supabase` (supabaseClient.js) and `Auth` (auth.js).
 const Data = {
 
-  //Recup tous les salons disponibles dans Supabase
+  // Fetch all available channels, oldest first
   async fetchChannels() {
     return await _supabase
       .from("channels")
@@ -9,7 +10,7 @@ const Data = {
       .order("created_at", { ascending: true });
   },
 
-  //Creer un nouveau salon
+  // Create a new channel; the creator's id is attached when a session exists
   async createChannel(name) {
     const { user } = await Auth.getUser();
     const payload = { name };
@@ -22,7 +23,8 @@ const Data = {
       .select();
   },
 
-  // Ecoute en temps reel les changements sur la table 'channels'
+  // Listen in real time to any change (insert/update/delete) on 'channels'.
+  // Returns an unsubscribe function to call when the listener is no longer needed.
   subscribeToChannels(callback) {
     const channel = _supabase
       .channel("public:channels")
@@ -38,8 +40,9 @@ const Data = {
     };
   },
 
-  // Recup les messages d'un salon (strictement filtré par salon)
+  // Fetch the messages of one channel (strictly filtered by channel), oldest first
   async fetchMessages(channelId) {
+    // No channel selected: return an empty result in the same shape as Supabase
     if (!channelId) {
       return { data: [], error: null };
     }
@@ -51,7 +54,8 @@ const Data = {
       .order("created_at", { ascending: true });
   },
 
-  // Enregistre un message dans la base de données Supabase lié au salon
+  // Save a message in the database, linked to a channel.
+  // Requires a logged-in user. The display name falls back to the email, then "Anonyme".
   async sendMessage(channelId, content, username) {
     const { user } = await Auth.getUser();
     if (!user) {
@@ -75,7 +79,10 @@ const Data = {
       .select();
   },
 
-  // Ecoute en temps réel les nouveaux messages ajoutes a la table 'messages'
+  // Listen in real time to new messages inserted in 'messages'.
+  // The realtime filter is not applied server-side here, so messages are
+  // filtered client-side by channel before calling the callback.
+  // Returns an unsubscribe function.
   subscribeToMessages(channelId, callback) {
     const channelName = channelId ? `realtime:messages:${channelId}` : "realtime:messages";
 
@@ -89,6 +96,7 @@ const Data = {
           table: "messages"
         },
         (payload) => {
+          // Loose comparison (==) tolerates number vs string ids
           if (!channelId || payload.new.channel_id === channelId || payload.new.channel_id == channelId) {
             callback(payload.new);
           }
@@ -102,8 +110,9 @@ const Data = {
   }
 };
 
-//Gestion du stockage local (localStorage) pour conserver le salon actif
+// Local storage helper (localStorage) to remember the active channel
 const Local = {
+  // Returns the saved channel object, or null if absent/corrupted
   readCurrentChannel() {
     try {
       const data = localStorage.getItem("current_channel");
@@ -125,6 +134,7 @@ const Local = {
     localStorage.removeItem("current_channel");
   },
 
+  // Called on logout to wipe the stored channel
   clearSession() {
     localStorage.removeItem("current_channel");
   }

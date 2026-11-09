@@ -1,11 +1,11 @@
-//Variables de l'état de la page
+// Page state variables
 let currentChannel = Local.readCurrentChannel();
 let currentUser = null;
 let allChannels = [];
 let unsubscribeMessages = null;
 let unsubscribeChannels = null;
 
-// Element du DOM
+// DOM elements
 const inputMessage = document.getElementById("message-input");
 const divMessages = document.getElementById("chat-display-box");
 const formMessage = document.getElementById("form-message");
@@ -17,9 +17,9 @@ const channelsSearchInput = document.getElementById("channels-search-input");
 const btnAddChannel = document.getElementById("btn-add-channel");
 
 
-// --- Gestion des Salons (Channels) ---
+// --- Channel management ---
 
-// Charge tous les salons depuis Supabase
+// Load all channels from Supabase, make sure a default one exists, and restore the saved one
 async function loadChannels() {
   const { data: channels, error } = await Data.fetchChannels();
   if (error) {
@@ -32,7 +32,7 @@ async function loadChannels() {
 
   allChannels = channels || [];
 
-  // S'il n'y a encore aucun salon dans la base, on crée le salon par défaut "Général"
+  // If the database has no channel yet, create the default "Général" channel
   if (allChannels.length === 0) {
     const { data: created, error: createError } = await Data.createChannel("Général");
     if (!createError && created && created.length > 0) {
@@ -42,7 +42,7 @@ async function loadChannels() {
     }
   }
 
-  // Vérifie si le salon sauvegardé dans localStorage existe toujours
+  // Check that the channel saved in localStorage still exists (otherwise fall back to the first one)
   if (currentChannel) {
     const exists = allChannels.find((c) => c.id === currentChannel.id);
     if (exists) {
@@ -64,14 +64,14 @@ async function loadChannels() {
   renderChannelsList(getFilteredChannels());
 }
 
-// Retourne la liste des salons filtrés par la barre de recherche
+// Return the channels filtered by the search box
 function getFilteredChannels() {
   const query = channelsSearchInput ? channelsSearchInput.value.toLowerCase().trim() : "";
   if (!query) return allChannels;
   return allChannels.filter((c) => c.name && c.name.toLowerCase().includes(query));
 }
 
-// Affiche la liste des salons dans la sidebar à gauche
+// Render the channel list in the left sidebar (built with textContent, so names are never parsed as HTML)
 function renderChannelsList(channelsToRender) {
   if (!channelsList) return;
   channelsList.replaceChildren();
@@ -110,7 +110,7 @@ function renderChannelsList(channelsToRender) {
   });
 }
 
-// Sélectionne un salon et charge ses messages dédiés
+// Switch to a channel and load its messages
 async function selectChannel(channel) {
   if (currentChannel && currentChannel.id === channel.id) {
     return;
@@ -120,32 +120,32 @@ async function selectChannel(channel) {
   Local.writeCurrentChannel(channel);
   showChannelTitle(channel.name);
 
-  // Met à jour l'affichage actif dans la sidebar
+  // Refresh the sidebar to highlight the active channel
   renderChannelsList(getFilteredChannels());
 
-  // Réabonne l'écoute en temps réel pour le nouveau salon
+  // Re-subscribe to realtime messages for the new channel (unsubscribing from the old one first)
   unsubscribeMessages?.();
   unsubscribeMessages = Data.subscribeToMessages(channel.id, appendMessage);
 
-  // Charge les messages du salon sélectionné
+  // Load the messages of the selected channel
   await loadMessages();
 }
 
-// Met à jour le titre du salon dans l'en-tête
+// Update the channel title in the header
 function showChannelTitle(title) {
   if (spanChannelTitle) {
     spanChannelTitle.textContent = title ? "# " + title : "# Aucun salon";
   }
 }
 
-// Filtre les salons lors de la saisie dans le champ de recherche
+// Filter channels as the user types in the search field
 if (channelsSearchInput) {
   channelsSearchInput.addEventListener("input", () => {
     renderChannelsList(getFilteredChannels());
   });
 }
 
-// Création d'un nouveau salon via le bouton +
+// Create a new channel via the + button
 if (btnAddChannel) {
   btnAddChannel.addEventListener("click", async () => {
     const name = prompt("Nom du nouveau salon :");
@@ -154,7 +154,7 @@ if (btnAddChannel) {
     const trimmed = name.trim().replace(/^#\s*/, "");
     if (!trimmed) return;
 
-    // Vérifie si le salon existe déjà
+    // Reject duplicate channel names (case-insensitive)
     const exists = allChannels.some(
       (c) => c.name && c.name.toLowerCase() === trimmed.toLowerCase()
     );
@@ -175,16 +175,16 @@ if (btnAddChannel) {
       allChannels.push(newChannel);
       await selectChannel(newChannel);
     } else {
-      // Recharger tous les salons depuis la base au cas où select() n'a rien retourné
+      // Reload all channels from the database in case select() returned nothing
       await loadChannels();
     }
   });
 }
 
 
-// --- Gestion des Messages ---
+// --- Message management ---
 
-// Charge les messages du salon actif depuis Supabase
+// Load the active channel's messages from Supabase
 async function loadMessages() {
   const channelId = currentChannel ? currentChannel.id : null;
 
@@ -216,9 +216,9 @@ async function loadMessages() {
   scrollMessages();
 }
 
-// Ajoute un message dans la boîte d'affichage
+// Append a message to the display box (used for realtime events and for our own sent messages)
 function appendMessage(message) {
-  // Retire l'état vide si présent
+  // Remove the empty-state placeholder if present
   const emptyState = divMessages.querySelector(".chat-empty-state");
   if (emptyState) {
     emptyState.remove();
@@ -228,27 +228,27 @@ function appendMessage(message) {
   scrollMessages();
 }
 
-// Construit et insère l'élément HTML d'un message
+// Build and insert the HTML element of a message
 function displayMessage(message) {
-  // Évite d'afficher deux fois le même message
+  // Avoid displaying the same message twice (realtime event + local append)
   if (message.id && divMessages.querySelector(`[data-id="${message.id}"]`)) {
     return;
   }
 
-  // Vert si l'utilisateur connecté est l'auteur, gris si c'est quelqu'un d'autre
+  // Green if the logged-in user is the author, gray if it is someone else
   const isSent = currentUser && (
     message.user_id == currentUser.id ||
     (message.username && currentUser.email && message.username === currentUser.email)
   );
 
-  // Conteneur du message (sent = vert à droite, received = gris à gauche)
+  // Message container (sent = green on the right, received = gray on the left)
   const msgElement = document.createElement("div");
   msgElement.className = `message ${isSent ? "sent" : "received"}`;
   if (message.id) {
     msgElement.setAttribute("data-id", message.id);
   }
 
-  // Nom de l'expéditeur pour les messages reçus
+  // Sender name, only shown on received messages
   if (!isSent && message.username) {
     const authorSpan = document.createElement("span");
     authorSpan.className = "author";
@@ -256,12 +256,12 @@ function displayMessage(message) {
     msgElement.appendChild(authorSpan);
   }
 
-  // Bulle du texte
+  // Text bubble (textContent prevents HTML injection)
   const bubble = document.createElement("div");
   bubble.className = "bubble";
   bubble.textContent = message.content;
 
-  // Heure du message
+  // Message time
   const timeSpan = document.createElement("span");
   timeSpan.className = "time";
   timeSpan.textContent = formatTime(message.created_at);
@@ -271,7 +271,7 @@ function displayMessage(message) {
   divMessages.appendChild(msgElement);
 }
 
-// Affiche un état vide lorsque le salon ne contient pas de message
+// Show a placeholder when the channel has no message
 function showEmptyState(text) {
   const emptyDiv = document.createElement("div");
   emptyDiv.className = "chat-empty-state";
@@ -288,12 +288,12 @@ function showEmptyState(text) {
   divMessages.appendChild(emptyDiv);
 }
 
-// Défilement automatique vers le bas
+// Auto-scroll to the bottom
 function scrollMessages() {
   divMessages.scrollTop = divMessages.scrollHeight;
 }
 
-// Transforme la date Supabase en heure lisible (ex: "14:05")
+// Convert a Supabase timestamp to a readable time (e.g. "14:05")
 function formatTime(dateString) {
   if (!dateString) return "";
   const date = new Date(dateString);
@@ -303,29 +303,29 @@ function formatTime(dateString) {
 }
 
 
-// --- Formulaire d'envoi de message ---
+// --- Message sending form ---
 
 formMessage.addEventListener("submit", async (event) => {
   event.preventDefault();
 
-  // Vérifie si l'utilisateur est bien connecté
+  // Make sure the user is logged in
   if (!currentUser) {
     alert("Vous devez être connecté pour envoyer un message.");
     window.location.replace("../signin.html");
     return;
   }
 
-  // Vérifie qu'un salon est bien sélectionné
+  // Make sure a channel is selected
   if (!currentChannel) {
     alert("Veuillez sélectionner un salon avant d'envoyer un message.");
     return;
   }
 
-  // Vérifie que le message n'est pas vide
+  // Ignore empty messages
   const content = inputMessage.value.trim();
   if (!content) return;
 
-  // Enregistrement du message dans Supabase lié au salon actif
+  // Save the message in Supabase, linked to the active channel
   const { data, error } = await Data.sendMessage(
     currentChannel.id,
     content,
@@ -338,17 +338,17 @@ formMessage.addEventListener("submit", async (event) => {
     return;
   }
 
-  // Affiche immédiatement le message envoyé
+  // Display the sent message immediately
   if (data && data.length > 0) {
     appendMessage(data[0]);
   }
 
-  // Vide la zone de texte
+  // Clear the text area
   inputMessage.value = "";
   inputMessage.focus();
 });
 
-// Envoi avec la touche Entrée (sans Shift)
+// Send with Enter (Shift+Enter inserts a new line)
 inputMessage.addEventListener("keydown", (event) => {
   if (event.key === "Enter" && !event.shiftKey) {
     event.preventDefault();
@@ -357,7 +357,7 @@ inputMessage.addEventListener("keydown", (event) => {
 });
 
 
-// --- Authentification et Déconnexion ---
+// --- Authentication and logout ---
 
 if (linkLogout) {
   linkLogout.addEventListener("click", async (event) => {
@@ -368,16 +368,17 @@ if (linkLogout) {
   });
 }
 
+// Safety net: if the session ends (expired, or signed out from another tab), clean up and leave
 Auth.onSessionEnded(() => {
   Local.clearSession();
   window.location.replace("../signin.html");
 });
 
 
-// --- Initialisation de la page ---
+// --- Page initialization ---
 
 async function init() {
-  // Vérifie si l'utilisateur est connecté
+  // Check that the user is logged in, otherwise redirect
   currentUser = (await Auth.getUser()).user;
   if (!currentUser) {
     alert("Vous devez être connecté pour accéder au chat.");
@@ -385,24 +386,24 @@ async function init() {
     return;
   }
 
-  // Affiche l'email de l'utilisateur connecté dans l'en-tête
+  // Show the logged-in user's email in the header
   if (userStatus && currentUser.email) {
     userStatus.textContent = currentUser.email;
   }
 
-  // Charge les salons et sélectionne le salon actif
+  // Load channels and select the active one
   await loadChannels();
 
-  // Charge les messages du salon sélectionné
+  // Load the messages of the selected channel
   await loadMessages();
 
-  // Écoute les nouveaux messages du salon en temps réel
+  // Listen to new messages of the channel in real time
   if (currentChannel) {
     unsubscribeMessages?.();
     unsubscribeMessages = Data.subscribeToMessages(currentChannel.id, appendMessage);
   }
 
-  // Écoute l'ajout de nouveaux salons en temps réel par d'autres utilisateurs
+  // Listen to channels added/changed by other users in real time
   unsubscribeChannels?.();
   unsubscribeChannels = Data.subscribeToChannels(async () => {
     const { data: channels } = await Data.fetchChannels();

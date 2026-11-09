@@ -1,7 +1,7 @@
-
+// Base URL of ExchangeRate-API; the key is embedded in the URL path (see env.js)
 const BASE_API="https://v6.exchangerate-api.com/v6/"+secretKey()+"/";
 
-// variables and fetch element
+// State and DOM elements
 let selectsFilled = false;
 const btnOpen = document.getElementById('open-box');
 const btnClose = document.getElementById('close-box');
@@ -13,9 +13,11 @@ const selectBoxConvert = document.getElementById('convert-currency');
 const txtBoxBaseAmont = document.getElementById('base-amount');
 const txtBoxConvertAmount= document.getElementById('convert-amount');
 
+// True if the string is a plain number (loose comparison with its parsed float)
 const isNumeric = (string) => string == Number.parseFloat(string)
 
-// function
+// API helpers and UI functions
+// Fetch the list of supported currency codes; returns undefined on failure
 async function getCurrencies() {
     try {
         const res = await fetch(BASE_API+"codes");
@@ -28,6 +30,7 @@ async function getCurrencies() {
     }
 }
 
+// Fill both <select> boxes with "Name(CODE)" options, sorted by currency name
 function fillSelects(currencies) {
 
     //sort in name order
@@ -51,6 +54,7 @@ function fillSelects(currencies) {
     selectsFilled = true;
 }
 
+// Convert `amount` from baseCode to convertCode via the API's pair endpoint; returns undefined on failure
 async function Convert(baseCode,convertCode,amount) {
     try {
         const res = await fetch(BASE_API+"pair/"+baseCode+"/"+convertCode+"/"+amount);
@@ -63,10 +67,10 @@ async function Convert(baseCode,convertCode,amount) {
     }
 }
 
-//reaction
+// Event handlers
 
 btnOpen.addEventListener('click', async () => {
-    //fill select box with currencies name and code
+    // Lazily fill the select boxes the first time the panel is opened
 
     if(!selectsFilled){
         //fetch data
