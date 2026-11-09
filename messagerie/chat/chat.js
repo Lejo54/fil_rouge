@@ -364,14 +364,14 @@ if (linkLogout) {
     event.preventDefault();
     await Auth.signOut();
     Local.clearSession();
-    window.location.replace("../signin.html");
+    window.location.replace("../connection/signin.html");
   });
 }
 
 // Safety net: if the session ends (expired, or signed out from another tab), clean up and leave
 Auth.onSessionEnded(() => {
   Local.clearSession();
-  window.location.replace("../signin.html");
+  window.location.replace("../connection/signin.html");
 });
 
 
@@ -382,7 +382,7 @@ async function init() {
   currentUser = (await Auth.getUser()).user;
   if (!currentUser) {
     alert("Vous devez être connecté pour accéder au chat.");
-    window.location.replace("../signin.html");
+    window.location.replace("../connection/signin.html");
     return;
   }
 
