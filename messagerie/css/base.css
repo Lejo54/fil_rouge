@@ -22,7 +22,7 @@ body {
   cursor: var(--cursor); /* NOTE: --cursor is not defined in :root, so this has no effect */
   overflow-x: hidden;
   overflow-y: auto;
-  height: auto;
+  min-height: 100vh;
 }
 
 button,
@@ -34,14 +34,16 @@ select {
 
 .main-interface {
   z-index: 1;
-  height: 60rem;
+  height: 30rem;          
   width: 100%;
+  max-width: 40rem;        
   background-color: var(--gris-fond);
-  margin: 0 0 0 1rem;
+  margin: auto; 
   padding: 0;
   text-align: center;
   font-size: 2rem;
   font-weight: bold;
+  border-radius: 1rem;
 }
 .main-gif {
   display: block;
@@ -64,6 +66,8 @@ ul.nav-bar {
   width: 12.5rem;
   height: auto;
   background-color: var(--gris-fond);
+  border-radius: 1rem;   /* ajouté */
+  overflow: hidden;
 }
 
 li.nav-element a {
@@ -147,6 +151,7 @@ li.nav-element a {
     display: flex;
     flex-direction: row;
     overflow-x: auto;
+    border-radius: 0.5rem;
   }
 
   li.nav-element {
