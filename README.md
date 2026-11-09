@@ -30,3 +30,11 @@ Dans une équipe de 2 ([**Joseph Cuiller**](https://github.com/Lejo54) et [**Art
   - L'email doit être sous format : première lettre du prénom, nom de famille,"@" puis "etu.uqac.ca". Exemple : si je m'appel Luc MICHON je met donc : lmichon@etu.uqac.ca
 - Entrez un mot de passe
 - Dès que vous êtes connecté vous pourrez avoir accès au chat et aux diverses fonctionnalités !
+
+## Screenshoots de l'application
+
+### Page d'accueil
+![My Skills](./messagerie/images/home.png)
+
+### Page de chat
+![My Skills](./messagerie/images/chat.png)
